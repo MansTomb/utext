@@ -3,6 +3,14 @@
 
 #include <QMainWindow>
 #include <QtWidgets/QTableWidgetItem>
+#include <QtWidgets/QDialog>
+#include <QtWidgets/QStyleFactory>
+#include <QLineEdit>
+
+#include "ui_mainwindow.h"
+#include "texteditor.h"
+#include "emptywidget.h"
+#include "Connecter.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }

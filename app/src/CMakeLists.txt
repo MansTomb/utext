@@ -1,4 +1,9 @@
-set(SOURCES mainwindow.cpp mainwindow.ui tabchanger.cpp tabchanger.h projectview.cpp projectview.h texteditor.cpp texteditor.h emptywidget.cpp emptywidget.h)
+set(SOURCES mainwindow.cpp mainwindow.ui
+        tabchanger.cpp tabchanger.h
+        projectview.cpp projectview.h
+        texteditor.cpp texteditor.h
+        emptywidget.cpp emptywidget.h
+        Connecter.cpp Connecter.h)
 
 add_library(src ${SOURCES})
 target_link_libraries(src PRIVATE Qt${QT_VERSION_MAJOR}::Core

@@ -1,15 +1,9 @@
-#include <QtWidgets/QDialog>
-#include <QtWidgets/QStyleFactory>
-#include <QLineEdit>
-
 #include "mainwindow.h"
-#include "ui_mainwindow.h"
-#include "texteditor.h"
-#include "emptywidget.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow) {
     ui->setupUi(this);
+    Connecter::instance().setToolbar(ui->toolBar);
     EmptyWidget *text = new EmptyWidget;
     text->addWidgetToLayout(new TextEditor);
     text->addWidgetToLayout(new TextEditor);

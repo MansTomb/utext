@@ -4,8 +4,8 @@
 #include <QGridLayout>
 #include <QDebug>
 #include <QApplication>
-
-#include <mainwindow.h>
+#include <QToolBar>
+#include <QWindow>
 
 class Filter : public QObject {
  Q_OBJECT
@@ -14,6 +14,10 @@ class Filter : public QObject {
 };
 
 class TextEditor : public QPlainTextEdit {
+    Q_OBJECT
+
  public:
     explicit TextEditor(QWidget *parent = Q_NULLPTR);
+ public slots:
+    void addText();
 };
