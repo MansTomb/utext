@@ -5,6 +5,7 @@ TextEditor::TextEditor(QWidget *parent) : QPlainTextEdit(parent) {
     installEventFilter(new Filter);
     Connecter::instance().ConnectToolBarToEditor(this);
 }
+
 void TextEditor::addText() {
     if (hasFocus())
         appendPlainText("124");
