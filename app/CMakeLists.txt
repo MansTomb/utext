@@ -7,10 +7,11 @@ include_directories(../cmake-build-debug/app/src/src_autogen/include)
 
 add_compile_options(
     -std=c++17
-    -Werror
-    -Wall
-    -Wextra
-    -Wpedantic
+#    -Werror
+#    -Wall
+#    -Wextra
+#    -Wpedantic
+#    -Wno-unused
 )
 
 set(CMAKE_AUTOUIC ON)
