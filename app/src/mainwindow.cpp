@@ -4,10 +4,13 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow) {
     ui->setupUi(this);
-    auto layout = ui->splitter->findChild<EmptyWidget *>()->layout();
+    auto whandler = ui->splitter->findChild<EmptyWidget *>();
     Connecter::instance().setToolbar(ui->toolBar);
-    layout->addWidget(new TabChanger);
-    layout->addWidget(new TabChanger);
+    whandler->addNewWindow(new TabChanger, 0, 0);
+    whandler->addNewWindow(new TabChanger, 0, 0);
+    whandler->addNewWindow(new TabChanger, 1, 0);
+    whandler->addNewWindow(new TabChanger, 1, 0);
+    whandler->addNewWindow(new TabChanger, -1, 0);
 }
 
 MainWindow::~MainWindow() {
