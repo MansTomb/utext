@@ -16,8 +16,14 @@ class Filter : public QObject {
 class TextEditor : public QPlainTextEdit {
     Q_OBJECT
 
+ protected:
+    void focusInEvent(QFocusEvent *e) override;
  public:
-    explicit TextEditor(QWidget *parent = Q_NULLPTR);
+    explicit TextEditor(QFile *file, QWidget *parent = Q_NULLPTR);
  public slots:
     void addText();
+ signals:
+    void InFocus(QWidget *widget);
+ private:
+    QFile *file;
 };

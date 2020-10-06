@@ -15,8 +15,10 @@ class EmptyWidget : public QWidget {
     Q_OBJECT
  public:
     explicit EmptyWidget(QWidget *parent = Q_NULLPTR);
+    void AddPageToLastFocus(QString label, QFile *file);
  public slots:
     void addNewWindow(TabChanger *tabs);
+    void LastFocusedTabController(QWidget *widget);
  protected:
     void dropEvent(QDropEvent *event) override;
     void dragEnterEvent(QDragEnterEvent *event) override;
@@ -25,5 +27,6 @@ class EmptyWidget : public QWidget {
  private:
     void Split(const int x, const int y);
 
-    QSplitter *split;
+    QWidget *m_lastFocus {Q_NULLPTR};
+    QSplitter *m_split;
 };

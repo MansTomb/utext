@@ -5,6 +5,7 @@
 #include <QGridLayout>
 #include <QEvent>
 #include <QMetaMethod>
+#include <QFile>
 
 class TabChanger : public QTabWidget {
     Q_OBJECT
@@ -15,6 +16,7 @@ class TabChanger : public QTabWidget {
     void dropEvent(QDropEvent *event) override;
  public:
     explicit TabChanger(int x = 0, int y = 0, QWidget *parent = Q_NULLPTR);
+    void AddPage(QString label, QFile *file);
     int x();
     int y();
  public slots:
@@ -22,6 +24,7 @@ class TabChanger : public QTabWidget {
  signals:
     void SplitHorizontaly(const int x, const int y);
     void SplitVerticaly(const int x, const int y);
+    void TabFocused(QWidget *widget);
  private:
     int m_x, m_y;
 };

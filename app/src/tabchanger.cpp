@@ -7,7 +7,6 @@
 #include <QSignalMapper>
 
 TabChanger::TabChanger(int x, int y, QWidget *parent) : m_x(x), m_y(y), QTabWidget(parent) {
-    insertTab(0, new TextEditor, "Log");
     setContextMenuPolicy(Qt::ContextMenuPolicy::CustomContextMenu);
     setAcceptDrops(true);
     connect(this, &TabChanger::customContextMenuRequested, this, &TabChanger::ShowContextMenu);
@@ -49,4 +48,12 @@ int TabChanger::y() {
 
 int TabChanger::x() {
     return m_x;
+}
+
+void TabChanger::AddPage(QString label, QFile *file) {
+    TextEditor *editor = new TextEditor(file);
+
+    connect(editor, &TextEditor::InFocus, this, [=]{TabFocused(this);});
+    insertTab(0, editor, label);
+    setCurrentIndex(0);
 }
