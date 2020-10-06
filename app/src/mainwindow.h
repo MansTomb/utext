@@ -6,6 +6,7 @@
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QStyleFactory>
 #include <QLineEdit>
+#include <QFileSystemModel>
 
 #include "ui_mainwindow.h"
 #include "texteditor.h"
@@ -24,5 +25,6 @@ class MainWindow : public QMainWindow {
     ~MainWindow();
  private:
     Ui::MainWindow *ui;
+    QFileSystemModel *m_dirmodel;
 };
 #endif // MAINWINDOW_H
