@@ -1,7 +1,7 @@
 #include "texteditor.h"
 #include "Connecter.h"
 
-TextEditor::TextEditor(QFile *file, QWidget *parent) : QPlainTextEdit(parent) {
+TextEditor::TextEditor(QFile *file, QWidget *parent) : QTextEdit(parent) {
     installEventFilter(new Filter);
     Connecter::instance().ConnectToolBarToEditor(this);
 
@@ -11,16 +11,41 @@ TextEditor::TextEditor(QFile *file, QWidget *parent) : QPlainTextEdit(parent) {
 
 void TextEditor::addText() {
     if (hasFocus())
-        appendPlainText("124");
+        insertPlainText("124");
 }
 void TextEditor::focusInEvent(QFocusEvent *e) {
-    QPlainTextEdit::focusInEvent(e);
+    QTextEdit::focusInEvent(e);
     emit InFocus(this);
 }
 
 bool Filter::eventFilter(QObject *object, QEvent *event) {
-    if (event->type() == QEvent::ShortcutOverride) {
-        return true;
-    }
-    return false;
+    return event->type() == QEvent::ShortcutOverride;
+}
+
+
+void TextEditor::copy() {
+    if (hasFocus())
+        QTextEdit::copy();
+}
+void TextEditor::paste() {
+    if (hasFocus())
+        QTextEdit::paste();
+}
+void TextEditor::cut() {
+    if (hasFocus())
+        QTextEdit::cut();
+}
+void TextEditor::find() {
+
+}
+void TextEditor::replace() {
+
+}
+void TextEditor::undo() {
+    if (hasFocus())
+        QTextEdit::undo();
+}
+void TextEditor::redo() {
+    if (hasFocus())
+        QTextEdit::redo();
 }

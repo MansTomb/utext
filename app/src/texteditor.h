@@ -13,7 +13,7 @@ class Filter : public QObject {
     bool eventFilter(QObject *object, QEvent *event);
 };
 
-class TextEditor : public QPlainTextEdit {
+class TextEditor : public QTextEdit {
     Q_OBJECT
 
  protected:
@@ -22,6 +22,13 @@ class TextEditor : public QPlainTextEdit {
     explicit TextEditor(QFile *file, QWidget *parent = Q_NULLPTR);
  public slots:
     void addText();
+    void copy();
+    void paste();
+    void cut();
+    void find();
+    void replace();
+    void undo();
+    void redo();
  signals:
     void InFocus(QWidget *widget);
  private:
