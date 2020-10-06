@@ -25,7 +25,7 @@ class EmptyWidget : public QWidget {
     void dragMoveEvent(QDragMoveEvent *event) override;
     void dragLeaveEvent(QDragLeaveEvent *event) override;
  private:
-    void Split(const int x, const int y);
+    void Split(const int x, const int y, QWidget *editor);
 
     QWidget *m_lastFocus {Q_NULLPTR};
     QSplitter *m_split;

@@ -6,6 +6,8 @@
 #include <QEvent>
 #include <QMetaMethod>
 #include <QFile>
+#include <QMimeData>
+
 
 class TabChanger : public QTabWidget {
     Q_OBJECT
@@ -17,13 +19,14 @@ class TabChanger : public QTabWidget {
  public:
     explicit TabChanger(int x = 0, int y = 0, QWidget *parent = Q_NULLPTR);
     void AddPage(QString label, QFile *file);
+    void AddPage(QWidget *editor);
     int x();
     int y();
  public slots:
     void ShowContextMenu(const QPoint& pos);
  signals:
-    void SplitHorizontaly(const int x, const int y);
-    void SplitVerticaly(const int x, const int y);
+    void SplitHorizontaly(const int x, const int y, QWidget *editor);
+    void SplitVerticaly(const int x, const int y, QWidget *editor);
     void TabFocused(QWidget *widget);
  private:
     int m_x, m_y;

@@ -20,6 +20,7 @@ class TextEditor : public QTextEdit {
     void focusInEvent(QFocusEvent *e) override;
  public:
     explicit TextEditor(QFile *file, QWidget *parent = Q_NULLPTR);
+    QFile *file();
  public slots:
     void addText();
     void copy();
@@ -32,5 +33,5 @@ class TextEditor : public QTextEdit {
  signals:
     void InFocus(QWidget *widget);
  private:
-    QFile *file;
+    QFile *m_file;
 };

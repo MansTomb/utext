@@ -5,6 +5,7 @@
 #include <QDebug>
 #include <QMenu>
 #include <QSignalMapper>
+#include <QFileInfo>
 
 TabChanger::TabChanger(int x, int y, QWidget *parent) : m_x(x), m_y(y), QTabWidget(parent) {
     setContextMenuPolicy(Qt::ContextMenuPolicy::CustomContextMenu);
@@ -25,7 +26,15 @@ void TabChanger::dragLeaveEvent(QDragLeaveEvent *event) {
 }
 
 void TabChanger::dropEvent(QDropEvent *event) {
-    qDebug() << event->pos().x() << " " << event->pos().y() << " TabChanger";
+    if (!event->mimeData()->hasUrls())
+        return;
+    auto files = event->mimeData()->urls();
+
+    for (const auto &file : files) {
+        QFileInfo finfo(file.toString().remove(0, 7));
+        if (finfo.isFile())
+            AddPage(finfo.fileName(), new QFile(finfo.absoluteFilePath()));
+    }
 }
 
 void TabChanger::ShowContextMenu(const QPoint& pos) {
@@ -34,10 +43,9 @@ void TabChanger::ShowContextMenu(const QPoint& pos) {
     QAction action2("Split Verticaly", this);
 
     contextMenu.addAction(&action1);
-    connect(&action1, &QAction::triggered, this, [=] {SplitHorizontaly(m_x + 1, m_y);});
+    connect(&action1, &QAction::triggered, this, [=] { SplitHorizontaly(m_x + 1, m_y, currentWidget());});
     contextMenu.addAction(&action2);
-    connect(&action2, &QAction::triggered, this, [=] {SplitVerticaly(m_x, m_y + 1);});
-
+    connect(&action2, &QAction::triggered, this, [=] { SplitVerticaly(m_x, m_y + 1, currentWidget());});
 
     contextMenu.exec(mapToGlobal(pos));
 }
@@ -56,4 +64,10 @@ void TabChanger::AddPage(QString label, QFile *file) {
     connect(editor, &TextEditor::InFocus, this, [=]{TabFocused(this);});
     insertTab(0, editor, label);
     setCurrentIndex(0);
+}
+
+void TabChanger::AddPage(QWidget *editor) {
+    auto editnew = new TextEditor(dynamic_cast<TextEditor *>(editor)->file());
+
+    insertTab(0, editnew, editnew->file()->fileName().remove(0, editnew->file()->fileName().lastIndexOf('/') + 1));
 }

@@ -1,12 +1,13 @@
 #include "texteditor.h"
 #include "Connecter.h"
 
-TextEditor::TextEditor(QFile *file, QWidget *parent) : QTextEdit(parent) {
+TextEditor::TextEditor(QFile *file, QWidget *parent) : m_file(file), QTextEdit(parent) {
     installEventFilter(new Filter);
     Connecter::instance().ConnectToolBarToEditor(this);
 
     file->open(QIODevice::ReadWrite);
     setPlainText(file->readAll());
+    file->close();
 }
 
 void TextEditor::addText() {
@@ -48,4 +49,7 @@ void TextEditor::undo() {
 void TextEditor::redo() {
     if (hasFocus())
         QTextEdit::redo();
+}
+QFile *TextEditor::file() {
+    return m_file;
 }

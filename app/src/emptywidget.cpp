@@ -37,11 +37,11 @@ void EmptyWidget::addNewWindow(TabChanger *tabs) {
     }
 }
 
-void EmptyWidget::Split(const int x, const int y) {
+void EmptyWidget::Split(const int x, const int y, QWidget *editor) {
     TabChanger *tab = new TabChanger(x, y);
-
     connect(tab, &TabChanger::TabFocused, this, &EmptyWidget::LastFocusedTabController);
     addNewWindow(tab);
+    tab->AddPage(editor);
 }
 
 void EmptyWidget::LastFocusedTabController(QWidget *widget) {
