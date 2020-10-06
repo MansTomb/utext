@@ -12,15 +12,18 @@
 #include "tabchanger.h"
 
 class EmptyWidget : public QWidget {
+    Q_OBJECT
  public:
     explicit EmptyWidget(QWidget *parent = Q_NULLPTR);
-    void addNewWindow(TabChanger *tabs, int x, int y);
+ public slots:
+    void addNewWindow(TabChanger *tabs);
  protected:
     void dropEvent(QDropEvent *event) override;
     void dragEnterEvent(QDragEnterEvent *event) override;
     void dragMoveEvent(QDragMoveEvent *event) override;
     void dragLeaveEvent(QDragLeaveEvent *event) override;
  private:
+    void Split(const int x, const int y);
+
     QSplitter *split;
-    QVector<QSplitter *> splitters;
 };

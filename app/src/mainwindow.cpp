@@ -6,11 +6,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     auto whandler = ui->splitter->findChild<EmptyWidget *>();
     Connecter::instance().setToolbar(ui->toolBar);
-    whandler->addNewWindow(new TabChanger, 0, 0);
-    whandler->addNewWindow(new TabChanger, 0, 0);
-    whandler->addNewWindow(new TabChanger, 1, 0);
-    whandler->addNewWindow(new TabChanger, 1, 0);
-    whandler->addNewWindow(new TabChanger, -1, 0);
+    whandler->addNewWindow(new TabChanger(0, 0));
 }
 
 MainWindow::~MainWindow() {
