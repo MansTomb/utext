@@ -7,7 +7,7 @@ Connecter& Connecter::instance() {
 }
 
 void Connecter::ConnectToolBarToEditor(TextEditor *editor) {
-    auto actions = toolbar->actions();
+    auto actions = m_toolbar->actions();
 
     QObject::connect(actions[1], &QAction::triggered, editor, &TextEditor::copy);
     QObject::connect(actions[2], &QAction::triggered, editor, &TextEditor::cut);
@@ -19,5 +19,16 @@ void Connecter::ConnectToolBarToEditor(TextEditor *editor) {
 }
 
 void Connecter::setToolbar(QToolBar *tb) {
-    toolbar = tb;
+    m_toolbar = tb;
+}
+
+void Connecter::connectMenuBarToEditor(TextEditor *editor) {
+    auto actions = m_menubar->actions();
+    for (const auto& a : actions) {
+        qDebug() << a;
+    }
+}
+
+void Connecter::setMenuBar(QMenuBar *mb) {
+    m_menubar = mb;
 }

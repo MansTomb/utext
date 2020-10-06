@@ -7,6 +7,7 @@
 #include <QtWidgets/QStyleFactory>
 #include <QLineEdit>
 #include <QFileSystemModel>
+#include <QFileDialog>
 
 #include "ui_mainwindow.h"
 #include "texteditor.h"
@@ -23,7 +24,12 @@ class MainWindow : public QMainWindow {
  public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
- private:
+private slots:
+    void on_actionOpen_File_triggered();
+
+    void on_actionOpen_Folder_triggered();
+
+private:
     Ui::MainWindow *ui;
     QFileSystemModel *m_dirmodel;
 };

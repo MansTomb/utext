@@ -9,10 +9,13 @@ class Connecter {
 
     static Connecter& instance();
     void setToolbar(QToolBar *tb);
+    void setMenuBar(QMenuBar *mb);
     void ConnectToolBarToEditor(TextEditor *editor);
+    void connectMenuBarToEditor(TextEditor *editor);
  protected:
     Connecter() {};
 
  private:
-    QToolBar *toolbar = Q_NULLPTR;
+    QToolBar *m_toolbar = Q_NULLPTR;
+    QMenuBar *m_menubar = Q_NULLPTR;
 };
