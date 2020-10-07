@@ -8,6 +8,7 @@
 #include <QLineEdit>
 #include <QFileSystemModel>
 #include <QFileDialog>
+#include <QMessageBox>
 
 #include "ui_mainwindow.h"
 #include "texteditor.h"
@@ -28,6 +29,8 @@ private slots:
     void on_actionOpen_File_triggered();
 
     void on_actionOpen_Folder_triggered();
+
+    void on_actionSettings_triggered();
 
 private:
     Ui::MainWindow *ui;

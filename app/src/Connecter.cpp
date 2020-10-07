@@ -22,13 +22,13 @@ void Connecter::setToolbar(QToolBar *tb) {
     m_toolbar = tb;
 }
 
-void Connecter::connectMenuBarToEditor(TextEditor *editor) {
-    auto actions = m_menubar->actions();
-    for (const auto& a : actions) {
-        qDebug() << a;
-    }
-}
-
-void Connecter::setMenuBar(QMenuBar *mb) {
-    m_menubar = mb;
-}
+//void Connecter::connectMenuBarToEditor(TextEditor *editor) {
+////    auto actions = m_menubar->actions();
+////    for (const auto& a : actions) {
+////        qDebug() << a;
+////    }
+//}
+//
+//void Connecter::setMenuBar(QMenuBar *mb) {
+//    m_menubar = mb;
+//}

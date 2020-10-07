@@ -5,8 +5,8 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow) {
     ui->setupUi(this);
     Connecter::instance().setToolbar(ui->toolBar);
-    Connecter::instance().setMenuBar(ui->menubar);
-    Connecter::instance().connectMenuBarToEditor(nullptr);
+//    Connecter::instance().setMenuBar(ui->menubar);
+//    Connecter::instance().connectMenuBarToEditor(nullptr);
 
     // Dirmodel for file system
     m_dirmodel = new QFileSystemModel(this);
@@ -34,4 +34,8 @@ void MainWindow::on_actionOpen_Folder_triggered() {
                                                     QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
     auto index = dynamic_cast<QFileSystemModel *>(ui->treeView->model())->index(dir);
     ui->treeView->setRootIndex(index);
+}
+
+void MainWindow::on_actionSettings_triggered() {
+    QMessageBox::about(this, "", "settings");
 }
