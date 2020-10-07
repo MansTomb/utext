@@ -3,8 +3,6 @@
 
 #include <QDialog>
 
-#include "ui_preferences.h"
-
 namespace Ui {
 class Preferences;
 };

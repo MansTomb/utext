@@ -1,4 +1,5 @@
 #include "preferences.h"
+#include "ui_preferences.h"
 
 
 Preferences::Preferences(QWidget *parent) :

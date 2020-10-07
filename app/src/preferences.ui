@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>DropDialog</class>
- <widget class="QDialog" name="DropDialog">
+ <class>Preferences</class>
+ <widget class="QDialog" name="Preferences">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>469</width>
-    <height>460</height>
+    <width>705</width>
+    <height>659</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -15,75 +15,38 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <widget class="QCheckBox" name="checkBox">
-     <property name="text">
-      <string>Recursive add</string>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QCheckBox" name="checkBox_2">
-     <property name="maximumSize">
-      <size>
-       <width>16777215</width>
-       <height>20</height>
-      </size>
-     </property>
-     <property name="text">
-      <string>Append Files To Table</string>
-     </property>
-    </widget>
-   </item>
-   <item>
     <widget class="QLabel" name="label">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
      <property name="sizePolicy">
-      <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
-     <property name="maximumSize">
+     <property name="minimumSize">
       <size>
-       <width>16777215</width>
+       <width>0</width>
        <height>20</height>
       </size>
      </property>
+     <property name="styleSheet">
+      <string notr="true">Text {
+    color: &quot;blue&quot;
+    font.family: &quot;Arial&quot;
+    font.bold: true
+    font.italic: true
+    font.pixelSize: 12
+}</string>
+     </property>
      <property name="text">
-      <string>Add from dir by tag(empty for any)</string>
+      <string>Prefences uText:</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
      </property>
     </widget>
-   </item>
-   <item>
-    <widget class="QComboBox" name="comboBox">
-     <item>
-      <property name="text">
-       <string>Title</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Artist</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Album</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Genre</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Year</string>
-      </property>
-     </item>
-    </widget>
-   </item>
-   <item>
-    <widget class="QLineEdit" name="lineEdit"/>
    </item>
    <item>
     <widget class="QDialogButtonBox" name="buttonBox">
@@ -102,7 +65,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>accepted()</signal>
-   <receiver>DropDialog</receiver>
+   <receiver>Preferences</receiver>
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -118,7 +81,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>rejected()</signal>
-   <receiver>DropDialog</receiver>
+   <receiver>Preferences</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">
