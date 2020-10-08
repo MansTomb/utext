@@ -36,7 +36,6 @@ void MainWindow::on_actionOpen_Folder_triggered() {
 }
 
 void MainWindow::on_actionSettings_triggered() {
-    QMessageBox::about(this, "", "settings");
     Preferences *preferences = new Preferences;
     preferences->exec();
 }
