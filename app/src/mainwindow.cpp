@@ -1,12 +1,11 @@
 #include "mainwindow.h"
 #include "tabchanger.h"
+#include "preferences.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow) {
     ui->setupUi(this);
     Connecter::instance().setToolbar(ui->toolBar);
-//    Connecter::instance().setMenuBar(ui->menubar);
-//    Connecter::instance().connectMenuBarToEditor(nullptr);
 
     // Dirmodel for file system
     m_dirmodel = new QFileSystemModel(this);
@@ -38,4 +37,6 @@ void MainWindow::on_actionOpen_Folder_triggered() {
 
 void MainWindow::on_actionSettings_triggered() {
     QMessageBox::about(this, "", "settings");
+    Preferences *preferences = new Preferences;
+    preferences->exec();
 }
