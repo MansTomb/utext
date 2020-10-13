@@ -21,4 +21,6 @@ class ProjectView : public QTreeView {
     void dragEnterEvent(QDragEnterEvent *event) override;
     void dragLeaveEvent(QDragLeaveEvent *event) override;
     void dropEvent(QDropEvent *event) override;
+ public slots:
+    void ShowContextMenu(const QPoint &pos);
 };

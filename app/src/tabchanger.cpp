@@ -61,7 +61,7 @@ int TabChanger::x() {
 void TabChanger::AddPage(QString label, QFile *file) {
     TextEditor *editor = new TextEditor(file);
 
-    connect(editor, &TextEditor::InFocus, this, [=]{TabFocused(this);});
+    connect(editor, &TextEditor::InFocus, this, [=]{emit TabFocused(this);});
     insertTab(0, editor, label);
     setCurrentIndex(0);
 }
@@ -69,5 +69,6 @@ void TabChanger::AddPage(QString label, QFile *file) {
 void TabChanger::AddPage(QWidget *editor) {
     auto editnew = new TextEditor(dynamic_cast<TextEditor *>(editor)->file());
 
+    connect(editnew, &TextEditor::InFocus, this, [=]{emit TabFocused(this);});
     insertTab(0, editnew, editnew->file()->fileName().remove(0, editnew->file()->fileName().lastIndexOf('/') + 1));
 }

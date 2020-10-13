@@ -39,6 +39,7 @@ void EmptyWidget::addNewWindow(TabChanger *tabs) {
 
 void EmptyWidget::Split(const int x, const int y, QWidget *editor) {
     TabChanger *tab = new TabChanger(x, y);
+
     connect(tab, &TabChanger::TabFocused, this, &EmptyWidget::LastFocusedTabController);
     addNewWindow(tab);
     tab->AddPage(editor);
@@ -55,6 +56,7 @@ void EmptyWidget::AddPageToLastFocus(QString label, QFile *file) {
         m_split->findChild<TabChanger *>()->AddPage(label, file);
     else {
         TabChanger *tab = new TabChanger(0, 0);
+        connect(tab, &TabChanger::TabFocused, this, &EmptyWidget::LastFocusedTabController);
         addNewWindow(tab);
         tab->AddPage(label, file);
     }

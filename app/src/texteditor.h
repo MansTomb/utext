@@ -6,6 +6,9 @@
 #include <QApplication>
 #include <QToolBar>
 #include <QWindow>
+#include <QFontMetrics>
+
+#include "highligher.h"
 
 class Filter : public QObject {
  Q_OBJECT
@@ -33,5 +36,6 @@ class TextEditor : public QTextEdit {
  signals:
     void InFocus(QWidget *widget);
  private:
+    Highlighter *m_highlighter;
     QFile *m_file;
 };

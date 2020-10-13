@@ -4,8 +4,9 @@ set(SOURCES mainwindow.cpp mainwindow.ui mainwindow.h
         texteditor.cpp texteditor.h
         emptywidget.cpp emptywidget.h
         Connecter.cpp Connecter.h
-    preferences.ui preferences.cpp preferences.h
-    settingsUtext.cpp settingsUtext.h)
+        preferences.ui preferences.cpp preferences.h
+        settingsUtext.cpp settingsUtext.h
+        highligher.cpp highligher.h)
 
 add_library(src ${SOURCES})
 target_link_libraries(src PRIVATE Qt${QT_VERSION_MAJOR}::Core
