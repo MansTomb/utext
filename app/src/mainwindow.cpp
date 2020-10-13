@@ -5,7 +5,10 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow) {
     ui->setupUi(this);
+    this->setWindowTitle("uText");
     Connecter::instance().setToolbar(ui->toolBar);
+
+    settings = new QSettings(QCoreApplication::applicationDirPath() + "/res/settings/settingsUtext.ini", QSettings::IniFormat);
 
     // Dirmodel for file system
     m_dirmodel = new QFileSystemModel(this);
@@ -16,6 +19,12 @@ MainWindow::MainWindow(QWidget *parent)
     for (int i = 1; i < m_dirmodel->columnCount(); ++i) {
         ui->treeView->hideColumn(i);
     }
+
+//код прячет первый сплитер, который у нас пустой изначально))
+//    ui->splitter->setStyleSheet("QTabBar {\n"
+//                                               "background-color: transparent;\n"
+//                                               "qproperty-drawBase:0;\n"
+//                                               "}");
 }
 
 MainWindow::~MainWindow() {
@@ -36,6 +45,12 @@ void MainWindow::on_actionOpen_Folder_triggered() {
 }
 
 void MainWindow::on_actionSettings_triggered() {
-    Preferences *preferences = new Preferences;
+    auto *preferences = new Preferences;
     preferences->exec();
+}
+void MainWindow::loadSettings() {
+
+}
+void MainWindow::seveSettings() {
+
 }

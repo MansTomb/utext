@@ -4,9 +4,8 @@ set(SOURCES mainwindow.cpp mainwindow.ui mainwindow.h
         texteditor.cpp texteditor.h
         emptywidget.cpp emptywidget.h
         Connecter.cpp Connecter.h
-        rope.cpp rope.h
-        rope_node.cpp rope_node.h
-        preferences.ui preferences.cpp preferences.h)
+    preferences.ui preferences.cpp preferences.h
+    settingsUtext.cpp settingsUtext.h)
 
 add_library(src ${SOURCES})
 target_link_libraries(src PRIVATE Qt${QT_VERSION_MAJOR}::Core

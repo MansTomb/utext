@@ -9,11 +9,13 @@
 #include <QFileSystemModel>
 #include <QFileDialog>
 #include <QMessageBox>
+#include <QSettings>
 
 #include "ui_mainwindow.h"
 #include "texteditor.h"
 #include "emptywidget.h"
 #include "Connecter.h"
+#include "settingsUtext.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -25,6 +27,7 @@ class MainWindow : public QMainWindow {
  public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+
 private slots:
     void on_actionOpen_File_triggered();
 
@@ -33,7 +36,12 @@ private slots:
     void on_actionSettings_triggered();
 
 private:
+    void loadSettings();
+    void seveSettings();
+
     Ui::MainWindow *ui;
     QFileSystemModel *m_dirmodel;
+    QSettings *settings;
 };
+
 #endif // MAINWINDOW_H
