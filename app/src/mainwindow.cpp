@@ -7,7 +7,7 @@ MainWindow::MainWindow(QString name, QWidget *parent)
     ui->setupUi(this);
     this->setWindowTitle("uText");
     //    this->setWindowFlags(Qt::Window | Qt::WindowStaysOnTopHint);
-    settings = new QSettings(QCoreApplication::applicationDirPath() + "/res/settings/settingsUtext.ini", QSettings::IniFormat, this);
+    settings = new QSettings(QCoreApplication::applicationDirPath() + "/app/res/settings/settingsUtext.ini", QSettings::IniFormat, this);
     setObjectName(name);
     setWindowTitle(name);
     loadSettings();
@@ -23,6 +23,7 @@ MainWindow::MainWindow(QString name, QWidget *parent)
     for (int i = 1; i < m_dirmodel->columnCount(); ++i) {
         ui->treeView->hideColumn(i);
     }
+    ui->treeView->setHeaderHidden(true);
 }
 
 MainWindow::~MainWindow() {
@@ -44,11 +45,14 @@ void MainWindow::on_actionOpen_Folder_triggered() {
 }
 
 void MainWindow::on_actionSettings_triggered() {
-    auto *preferences = new Preferences;
-    QPalette pall;
-    pall.setColor(preferences->backgroundRole(), Qt::black);
-    preferences->setPalette(pall);
-    preferences->exec();
+    auto *preferencesDialog = new Preferences;
+    QObject::connect(preferencesDialog, &Preferences::ReturnValues,
+                     this, &MainWindow::ProcessPreferences);
+    if (preferencesDialog->exec() == QDialog::Accepted) {
+
+    } else {
+
+    }
 }
 
 void MainWindow::loadSettings() {
@@ -61,4 +65,23 @@ void MainWindow::saveSettings() {
     settings->beginGroup("MainWindow");
     settings->setValue("geometry", geometry());
     settings->endGroup();
+    settings->beginGroup("Preferences");
+    settings->setValue("font", m_preferences["font"]);
+    settings->setValue("size_font", m_preferences["size_font"]);
+    settings->setValue("theme", m_preferences["theme"]);
+    settings->setValue("language", m_preferences["language"]);
+    settings->endGroup();
+}
+
+void MainWindow::ProcessPreferences(const QMap<QString, QString>& preferences) {
+    m_preferences.insert(preferences);
+//    for(const auto& p : preferences) {
+//        qDebug() << p << "\n";
+//    }
+//    qDebug() << "\n\n\n";
+//    for(const auto& p : m_preferences) {
+//        qDebug() << p << "\n";
+//    }
+
+    saveSettings();
 }

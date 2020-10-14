@@ -35,12 +35,15 @@ private slots:
 
     void on_actionSettings_triggered();
 
+    void ProcessPreferences(const QMap<QString, QString>& preferences);
+
 private:
     void loadSettings();
     void saveSettings();
 
     Ui::MainWindow *ui;
     QFileSystemModel *m_dirmodel;
+    QMap<QString, QString> m_preferences;
     QSettings *settings;
 };
 
