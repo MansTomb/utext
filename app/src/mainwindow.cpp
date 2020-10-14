@@ -45,6 +45,9 @@ void MainWindow::on_actionOpen_Folder_triggered() {
 
 void MainWindow::on_actionSettings_triggered() {
     auto *preferences = new Preferences;
+    QPalette pall;
+    pall.setColor(preferences->backgroundRole(), Qt::black);
+    preferences->setPalette(pall);
     preferences->exec();
 }
 

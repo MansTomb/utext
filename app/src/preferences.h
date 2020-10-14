@@ -12,11 +12,14 @@ class Preferences : public QDialog {
 
  public:
     explicit Preferences(QWidget *parent = nullptr);
-    ~Preferences();
+    ~Preferences() override;
  signals:
 
  private:
-//    QWidget m_parent;
+    void setFont();
+    void setSizeFont();
+    void setThema();
+    void setLanguage();
     Ui::Preferences *ui;
 };
 
