@@ -12,6 +12,7 @@ int main(int argc, char *argv[]) {
     MainWindow w("uText", 0);
     pall.setColor(w.backgroundRole(), Qt::black);
     w.setPalette(pall);
+    w.setAutoFillBackground(true);
     w.show();
     return a.exec();
 }

@@ -16,6 +16,7 @@ class Preferences : public QDialog {
  signals:
 
  private:
+//    QWidget m_parent;
     Ui::Preferences *ui;
 };
 
