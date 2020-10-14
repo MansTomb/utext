@@ -5,7 +5,6 @@ set(SOURCES mainwindow.cpp mainwindow.ui mainwindow.h
         emptywidget.cpp emptywidget.h
         Connecter.cpp Connecter.h
         preferences.ui preferences.cpp preferences.h
-        settingsUtext.cpp settingsUtext.h
         highligher.cpp highligher.h)
 
 add_library(src ${SOURCES})
