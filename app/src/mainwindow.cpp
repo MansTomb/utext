@@ -23,12 +23,6 @@ MainWindow::MainWindow(QString name, QWidget *parent)
     for (int i = 1; i < m_dirmodel->columnCount(); ++i) {
         ui->treeView->hideColumn(i);
     }
-
-//код прячет первый сплитер, который у нас пустой изначально))
-//    ui->splitter->setStyleSheet("QTabBar {\n"
-//                                               "background-color: transparent;\n"
-//                                               "qproperty-drawBase:0;\n"
-//                                               "}");
 }
 
 MainWindow::~MainWindow() {

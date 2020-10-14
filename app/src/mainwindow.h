@@ -15,7 +15,7 @@
 #include "texteditor.h"
 #include "emptywidget.h"
 #include "Connecter.h"
-#include "settingsUtext.h"
+
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }

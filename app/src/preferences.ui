@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>295</width>
-    <height>256</height>
+    <width>355</width>
+    <height>321</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -64,7 +64,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QSpinBox" name="spinBox">
+      <widget class="QComboBox" name="comboBox">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
          <horstretch>0</horstretch>
@@ -91,7 +91,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QSpinBox" name="spinBox_2">
+      <widget class="QComboBox" name="comboBox_2">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
          <horstretch>0</horstretch>
@@ -118,7 +118,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QSpinBox" name="spinBox_3">
+      <widget class="QComboBox" name="comboBox_3">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
          <horstretch>0</horstretch>
@@ -145,7 +145,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QSpinBox" name="spinBox_4">
+      <widget class="QComboBox" name="comboBox_4">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
          <horstretch>0</horstretch>
