@@ -8,7 +8,7 @@ int main(int argc, char *argv[]) {
     QApplication a(argc, argv);
     QApplication::setOrganizationName("uText");
     QApplication::setApplicationName("uText");
-    MainWindow w;
+    MainWindow w("uText", 0);
     w.show();
     return a.exec();
 }

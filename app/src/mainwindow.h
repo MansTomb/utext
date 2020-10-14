@@ -25,7 +25,7 @@ class MainWindow : public QMainWindow {
  Q_OBJECT
 
  public:
-    MainWindow(QWidget *parent = nullptr);
+    MainWindow(QString name, QWidget *parent = nullptr);
     ~MainWindow();
 
 private slots:
@@ -37,7 +37,7 @@ private slots:
 
 private:
     void loadSettings();
-    void seveSettings();
+    void saveSettings();
 
     Ui::MainWindow *ui;
     QFileSystemModel *m_dirmodel;

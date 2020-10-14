@@ -2,13 +2,16 @@
 #include "tabchanger.h"
 #include "preferences.h"
 
-MainWindow::MainWindow(QWidget *parent)
+MainWindow::MainWindow(QString name, QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow) {
     ui->setupUi(this);
     this->setWindowTitle("uText");
-    Connecter::instance().setToolbar(ui->toolBar);
+    settings = new QSettings(QCoreApplication::applicationDirPath() + "/res/settings/settingsUtext.ini", QSettings::IniFormat, this);
+    setObjectName(name);
+    setWindowTitle(name);
+    loadSettings();
 
-    settings = new QSettings(QCoreApplication::applicationDirPath() + "/res/settings/settingsUtext.ini", QSettings::IniFormat);
+    Connecter::instance().setToolbar(ui->toolBar);
 
     // Dirmodel for file system
     m_dirmodel = new QFileSystemModel(this);
@@ -28,6 +31,7 @@ MainWindow::MainWindow(QWidget *parent)
 }
 
 MainWindow::~MainWindow() {
+    saveSettings();
     delete ui;
 }
 
@@ -48,9 +52,15 @@ void MainWindow::on_actionSettings_triggered() {
     auto *preferences = new Preferences;
     preferences->exec();
 }
+
 void MainWindow::loadSettings() {
-
+    settings->beginGroup("MainWindow");
+    setGeometry(settings->value("geometry", QRect(1000, 1000, 1000, 1000)).toRect());
+    settings->endGroup();
 }
-void MainWindow::seveSettings() {
 
+void MainWindow::saveSettings() {
+    settings->beginGroup("MainWindow");
+    settings->setValue("geometry", geometry());
+    settings->endGroup();
 }
