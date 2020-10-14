@@ -6,6 +6,7 @@ MainWindow::MainWindow(QString name, QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow) {
     ui->setupUi(this);
     this->setWindowTitle("uText");
+    //    this->setWindowFlags(Qt::Window | Qt::WindowStaysOnTopHint);
     settings = new QSettings(QCoreApplication::applicationDirPath() + "/res/settings/settingsUtext.ini", QSettings::IniFormat, this);
     setObjectName(name);
     setWindowTitle(name);
