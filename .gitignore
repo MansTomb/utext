@@ -12,3 +12,5 @@ modules.xml
 test.iml
 vcs.xml
 misc.xml
+app/res/settings/*
+utext
