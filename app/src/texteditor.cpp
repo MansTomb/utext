@@ -26,7 +26,6 @@ bool Filter::eventFilter(QObject *object, QEvent *event) {
     return event->type() == QEvent::ShortcutOverride;
 }
 
-
 void TextEditor::copy() {
     if (hasFocus())
         QTextEdit::copy();
