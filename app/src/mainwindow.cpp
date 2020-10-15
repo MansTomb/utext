@@ -2,12 +2,11 @@
 #include "tabchanger.h"
 #include "preferences.h"
 
-MainWindow::MainWindow(QString name, QWidget *parent)
+MainWindow::MainWindow(const QString& name, QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow) {
     ui->setupUi(this);
     this->setWindowTitle("uText");
-    //    this->setWindowFlags(Qt::Window | Qt::WindowStaysOnTopHint);
-    settings = new QSettings(QCoreApplication::applicationDirPath() + "/app/res/settings/settingsUtext.ini", QSettings::IniFormat, this);
+    initSettings();
     setObjectName(name);
     setWindowTitle(name);
     loadSettings();
@@ -49,11 +48,7 @@ void MainWindow::on_actionSettings_triggered() {
     auto *preferencesDialog = new Preferences;
     QObject::connect(preferencesDialog, &Preferences::ReturnValues,
                      this, &MainWindow::ProcessPreferences);
-    if (preferencesDialog->exec() == QDialog::Accepted) {
-
-    } else {
-
-    }
+    preferencesDialog->exec();
 }
 
 void MainWindow::loadSettings() {
@@ -76,13 +71,17 @@ void MainWindow::saveSettings() {
 
 void MainWindow::ProcessPreferences(const QMap<QString, QString>& preferences) {
     m_preferences.insert(preferences);
-//    for(const auto& p : preferences) {
-//        qDebug() << p << "\n";
-//    }
-//    qDebug() << "\n\n\n";
-//    for(const auto& p : m_preferences) {
-//        qDebug() << p << "\n";
-//    }
     saveSettings();
+    for (auto &item : findChildren<TextEditor *>()) {
+        QFont font(m_preferences["font"]);
+        font.setPointSize(m_preferences["size_font"].toInt());
+        item->setFont(font);
+
+    }
+}
+
+void MainWindow::initSettings() {
+    settings = new QSettings(QCoreApplication::applicationDirPath() + "/app/res/settings/settingsUtext.ini",
+                             QSettings::IniFormat, this);
 }
 

@@ -10,6 +10,7 @@
 #include <QFileDialog>
 #include <QMessageBox>
 #include <QSettings>
+#include <QFontDatabase>
 
 #include "ui_mainwindow.h"
 #include "texteditor.h"
@@ -25,19 +26,17 @@ class MainWindow : public QMainWindow {
  Q_OBJECT
 
  public:
-    MainWindow(QString name, QWidget *parent = nullptr);
+    MainWindow(const QString& name, QWidget *parent = nullptr);
     ~MainWindow();
 
 private slots:
     void on_actionOpen_File_triggered();
-
     void on_actionOpen_Folder_triggered();
-
     void on_actionSettings_triggered();
-
     void ProcessPreferences(const QMap<QString, QString>& preferences);
 
 private:
+    void initSettings();
     void loadSettings();
     void saveSettings();
 

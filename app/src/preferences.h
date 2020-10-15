@@ -4,6 +4,7 @@
 #include <QDialog>
 #include <QMap>
 #include <QDebug>
+#include <QFontDatabase>
 
 namespace Ui {
 class Preferences;

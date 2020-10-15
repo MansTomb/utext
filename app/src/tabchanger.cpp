@@ -71,7 +71,6 @@ void TabChanger::AddPage(QString label, QFile *file) {
             return;
         }
     }
-
     connect(editor, &TextEditor::InFocus, this, [=]{emit TabFocused(this);});
     insertTab(0, editor, label);
     setCurrentIndex(0);

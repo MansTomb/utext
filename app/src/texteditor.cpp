@@ -7,7 +7,6 @@ TextEditor::TextEditor(QFile *file, QWidget *parent) : m_file(file), QTextEdit(p
     m_highlighter = new Highlighter(document());
     installEventFilter(new Filter);
     Connecter::instance().ConnectToolBarToEditor(this);
-
     file->open(QIODevice::ReadWrite);
     setPlainText(file->readAll());
     file->close();

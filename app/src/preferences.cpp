@@ -18,14 +18,18 @@ Preferences::~Preferences() {
 }
 
 void Preferences::setFont() {
-    QStringList fonts;
-    fonts << "Arial" << "Some font1" << "Some font2";
-    ui->comboBox->addItems(fonts);
+    QFontDatabase db;
+    ui->comboBox->addItems(db.families());
 }
 
 void Preferences::setSizeFont() {
     QStringList sizes;
-    sizes << "10" << "12" << "14" << "16" << "18";
+    for(int i = 5; i < 99; i++) {
+        if (i > 30) {
+            i += 2;
+        }
+        sizes << QString::number(i);
+    }
     ui->comboBox_2->addItems(sizes);
 }
 

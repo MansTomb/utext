@@ -7,7 +7,7 @@
 #include <QMetaMethod>
 #include <QFile>
 #include <QMimeData>
-
+#include <QSettings>
 
 class TabChanger : public QTabWidget {
     Q_OBJECT
