@@ -82,6 +82,6 @@ void MainWindow::ProcessPreferences(const QMap<QString, QString>& preferences) {
 //    for(const auto& p : m_preferences) {
 //        qDebug() << p << "\n";
 //    }
-
     saveSettings();
 }
+

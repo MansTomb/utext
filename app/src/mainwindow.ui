@@ -42,7 +42,7 @@
        <enum>Qt::Horizontal</enum>
       </property>
       <property name="handleWidth">
-       <number>5</number>
+       <number>1</number>
       </property>
       <widget class="ProjectView" name="treeView">
        <property name="sizePolicy">
@@ -80,6 +80,9 @@
       </widget>
      </widget>
     </item>
+    <item row="1" column="0">
+     <widget class="Logger" name="textEdit"/>
+    </item>
    </layout>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -100,6 +103,7 @@
     <addaction name="actionOpen_Logger"/>
     <addaction name="actionSave_All"/>
     <addaction name="actionSettings"/>
+    <addaction name="actionHide_ToolBar"/>
    </widget>
    <widget class="QMenu" name="menuEdit">
     <property name="title">
@@ -332,6 +336,14 @@
     <string>Ctrl+Shift+A</string>
    </property>
   </action>
+  <action name="actionHide_ToolBar">
+   <property name="text">
+    <string>Hide ToolBar</string>
+   </property>
+   <property name="shortcut">
+    <string>Alt+Shift+T</string>
+   </property>
+  </action>
  </widget>
  <customwidgets>
   <customwidget>
@@ -344,6 +356,11 @@
    <extends>QWidget</extends>
    <header>emptywidget.h</header>
    <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>Logger</class>
+   <extends>QTextEdit</extends>
+   <header>logger.h</header>
   </customwidget>
  </customwidgets>
  <resources/>
