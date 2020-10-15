@@ -265,6 +265,9 @@
    </property>
   </action>
   <action name="actionOpen_Logger">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>Open Logger</string>
    </property>
@@ -397,6 +400,22 @@
     <hint type="destinationlabel">
      <x>468</x>
      <y>33</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionOpen_Logger</sender>
+   <signal>triggered(bool)</signal>
+   <receiver>textEdit</receiver>
+   <slot>setHidden(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>644</x>
+     <y>421</y>
     </hint>
    </hints>
   </connection>

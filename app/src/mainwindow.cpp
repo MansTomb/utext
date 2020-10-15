@@ -24,6 +24,7 @@ MainWindow::MainWindow(QString name, QWidget *parent)
         ui->treeView->hideColumn(i);
     }
     ui->treeView->setHeaderHidden(true);
+    ui->textEdit->setHidden(true);
 }
 
 MainWindow::~MainWindow() {
