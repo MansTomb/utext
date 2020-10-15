@@ -16,6 +16,7 @@
 #include "texteditor.h"
 #include "emptywidget.h"
 #include "Connecter.h"
+#include "settings.h"
 
 
 QT_BEGIN_NAMESPACE
@@ -43,6 +44,7 @@ private:
     Ui::MainWindow *ui;
     QFileSystemModel *m_dirmodel;
     QMap<QString, QString> m_preferences;
+    Settings *preferences;
     QSettings *settings;
 };
 

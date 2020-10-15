@@ -14,7 +14,7 @@ class Preferences : public QDialog {
  Q_OBJECT
 
  public:
-    explicit Preferences(QWidget *parent = nullptr);
+    explicit Preferences(const QMap<QString, QString>& preferences, QWidget *parent = nullptr);
     ~Preferences() override;
  signals:
     void ReturnValues(QMap<QString, QString> m_preferences);

@@ -3,8 +3,8 @@
 
 #include <QMessageBox>
 
-Preferences::Preferences(QWidget *parent) :
-    QDialog(parent), ui(new Ui::Preferences) {
+Preferences::Preferences(const QMap<QString, QString>& preferences, QWidget *parent) :
+    QDialog(parent), ui(new Ui::Preferences), m_preferences(preferences) {
     ui->setupUi(this);
     setObjectName("Preferences");
     setFont();
@@ -19,7 +19,10 @@ Preferences::~Preferences() {
 
 void Preferences::setFont() {
     QFontDatabase db;
-    ui->comboBox->addItems(db.families());
+    QStringList list = db.families();
+
+    ui->comboBox->addItems(list);
+    ui->comboBox->setCurrentIndex(list.indexOf(m_preferences["font"]));
 }
 
 void Preferences::setSizeFont() {
@@ -31,6 +34,7 @@ void Preferences::setSizeFont() {
         sizes << QString::number(i);
     }
     ui->comboBox_2->addItems(sizes);
+    ui->comboBox_2->setCurrentIndex(sizes.indexOf(m_preferences["size_font"]));
 }
 
 void Preferences::setTheme() {
