@@ -64,6 +64,13 @@ int TabChanger::x() {
 void TabChanger::AddPage(QString label, QFile *file) {
     TextEditor *editor = new TextEditor(file);
 
+    for (const auto &item : findChildren<TextEditor *>()) {
+        if (dynamic_cast<TextEditor *>(item)->file()->fileName() == file->fileName()) {
+            setCurrentWidget(item);
+            return;
+        }
+    }
+
     connect(editor, &TextEditor::InFocus, this, [=]{emit TabFocused(this);});
     insertTab(0, editor, label);
     setCurrentIndex(0);
