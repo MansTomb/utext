@@ -18,7 +18,6 @@ class Filter : public QObject {
 
 class TextEditor : public QTextEdit {
     Q_OBJECT
-
  protected:
     void focusInEvent(QFocusEvent *e) override;
  public:
@@ -35,7 +34,9 @@ class TextEditor : public QTextEdit {
     void redo();
  signals:
     void InFocus(QWidget *widget);
+    void TriggerSearch();
+    void TriggerReplace();
  private:
-    Highlighter *m_highlighter;
-    QFile *m_file;
+    Highlighter *m_highlighter = Q_NULLPTR;
+    QFile *m_file = Q_NULLPTR;
 };

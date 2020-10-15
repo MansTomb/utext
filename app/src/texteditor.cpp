@@ -38,10 +38,12 @@ void TextEditor::cut() {
         QTextEdit::cut();
 }
 void TextEditor::find() {
-
+    if (hasFocus())
+        emit TriggerSearch();
 }
 void TextEditor::replace() {
-
+    if (hasFocus())
+        emit TriggerReplace();
 }
 void TextEditor::undo() {
     if (hasFocus())

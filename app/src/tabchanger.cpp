@@ -1,6 +1,7 @@
 #include "tabchanger.h"
 #include "texteditor.h"
 #include "emptywidget.h"
+#include "editorlayout.h"
 
 #include <QDebug>
 #include <QMenu>
@@ -47,9 +48,9 @@ void TabChanger::ShowContextMenu(const QPoint& pos) {
     QAction action2("Split Verticaly", this);
 
     contextMenu.addAction(&action1);
-    connect(&action1, &QAction::triggered, this, [=] { SplitHorizontaly(m_x + 1, m_y, currentWidget());});
+    connect(&action1, &QAction::triggered, this, [=] { SplitHorizontaly(m_x + 1, m_y, dynamic_cast<EditorLayout *>(currentWidget())->editor());});
     contextMenu.addAction(&action2);
-    connect(&action2, &QAction::triggered, this, [=] { SplitVerticaly(m_x, m_y + 1, currentWidget());});
+    connect(&action2, &QAction::triggered, this, [=] { SplitVerticaly(m_x, m_y + 1, dynamic_cast<EditorLayout *>(currentWidget())->editor());});
 
     contextMenu.exec(mapToGlobal(pos));
 }
@@ -63,7 +64,7 @@ int TabChanger::x() {
 }
 
 void TabChanger::AddPage(QString label, QFile *file) {
-    TextEditor *editor = new TextEditor(file);
+    auto editorLayout = new EditorLayout(file);
 
     for (const auto &item : findChildren<TextEditor *>()) {
         if (dynamic_cast<TextEditor *>(item)->file()->fileName() == file->fileName()) {
@@ -71,16 +72,16 @@ void TabChanger::AddPage(QString label, QFile *file) {
             return;
         }
     }
-    connect(editor, &TextEditor::InFocus, this, [=]{emit TabFocused(this);});
-    insertTab(0, editor, label);
+    connect(editorLayout->editor(), &TextEditor::InFocus, this, [=]{emit TabFocused(this);});
+    insertTab(0, editorLayout, label);
     setCurrentIndex(0);
 }
 
 void TabChanger::AddPage(QWidget *editor) {
-    auto editnew = new TextEditor(dynamic_cast<TextEditor *>(editor)->file());
+    auto editorLayout = new EditorLayout(dynamic_cast<TextEditor *>(editor)->file());
 
-    connect(editnew, &TextEditor::InFocus, this, [=]{emit TabFocused(this);});
-    insertTab(0, editnew, editnew->file()->fileName().remove(0, editnew->file()->fileName().lastIndexOf('/') + 1));
+    connect(editorLayout->editor(), &TextEditor::InFocus, this, [=]{emit TabFocused(this);});
+    insertTab(0, editorLayout, editorLayout->file()->fileName().remove(0, editorLayout->file()->fileName().lastIndexOf('/') + 1));
 }
 
 void TabChanger::CloseTab(int index) {

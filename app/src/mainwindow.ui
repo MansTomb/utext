@@ -419,6 +419,38 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>actionFind_2</sender>
+   <signal>triggered()</signal>
+   <receiver>actionFind</receiver>
+   <slot>trigger()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionReplace_2</sender>
+   <signal>triggered()</signal>
+   <receiver>actionReplace</receiver>
+   <slot>trigger()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>ChangeTheme(bool)</slot>
