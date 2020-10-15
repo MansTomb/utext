@@ -24,6 +24,8 @@ class TabChanger : public QTabWidget {
     int y();
  public slots:
     void ShowContextMenu(const QPoint& pos);
+ private slots:
+    void CloseTab(int index);
  signals:
     void SplitHorizontaly(const int x, const int y, QWidget *editor);
     void SplitVerticaly(const int x, const int y, QWidget *editor);

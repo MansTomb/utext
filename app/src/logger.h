@@ -12,4 +12,6 @@
 
 class Logger : public QTextEdit {
     Q_OBJECT
+ public:
+    explicit Logger(QWidget *parent = Q_NULLPTR);
 };

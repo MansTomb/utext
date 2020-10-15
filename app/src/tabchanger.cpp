@@ -13,6 +13,7 @@ TabChanger::TabChanger(int x, int y, QWidget *parent) : m_x(x), m_y(y), QTabWidg
     setDocumentMode(true);
     setTabsClosable(true);
     setMovable(true);
+    connect(this, &TabChanger::tabCloseRequested, this, &TabChanger::CloseTab);
     connect(this, &TabChanger::customContextMenuRequested, this, &TabChanger::ShowContextMenu);
 }
 
@@ -81,4 +82,10 @@ void TabChanger::AddPage(QWidget *editor) {
 
     connect(editnew, &TextEditor::InFocus, this, [=]{emit TabFocused(this);});
     insertTab(0, editnew, editnew->file()->fileName().remove(0, editnew->file()->fileName().lastIndexOf('/') + 1));
+}
+
+void TabChanger::CloseTab(int index) {
+    auto editor = widget(index);
+    removeTab(index);
+    delete editor;
 }
