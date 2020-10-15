@@ -10,6 +10,9 @@
 TabChanger::TabChanger(int x, int y, QWidget *parent) : m_x(x), m_y(y), QTabWidget(parent) {
     setContextMenuPolicy(Qt::ContextMenuPolicy::CustomContextMenu);
     setAcceptDrops(true);
+    setDocumentMode(true);
+    setTabsClosable(true);
+    setMovable(true);
     connect(this, &TabChanger::customContextMenuRequested, this, &TabChanger::ShowContextMenu);
 }
 
