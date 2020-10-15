@@ -3,7 +3,9 @@
 #include "tabchanger.h"
 
 EmptyWidget::EmptyWidget(QWidget *parent) : QWidget(parent){
-    setLayout(new QGridLayout);
+    auto gridLayout = new QGridLayout;
+    gridLayout->setMargin(0);
+    setLayout(gridLayout);
     setLayoutDirection(Qt::LayoutDirection::LeftToRight);
     m_split = new QSplitter(Qt::Orientation::Vertical);
     layout()->addWidget(m_split);
