@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>938</width>
-    <height>551</height>
+    <width>1290</width>
+    <height>574</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -82,6 +82,18 @@
     </item>
     <item row="1" column="0">
      <widget class="Logger" name="textEdit">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>300</height>
+       </size>
+      </property>
       <property name="readOnly">
        <bool>true</bool>
       </property>
@@ -94,7 +106,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>938</width>
+     <width>1290</width>
      <height>22</height>
     </rect>
    </property>
@@ -379,8 +391,8 @@
    <slot>setHidden(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>468</x>
-     <y>33</y>
+     <x>-1</x>
+     <y>-1</y>
     </hint>
     <hint type="destinationlabel">
      <x>468</x>
