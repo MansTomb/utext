@@ -23,7 +23,7 @@ MainWindow::MainWindow(const QString& name, QWidget *parent)
 
     //View file system
     ui->treeView->setModel(m_dirmodel);
-    for (int i = 1; i < m_dirmodel->columnCount(); ++i) {
+    for (int i = 0; i < m_dirmodel->columnCount(); ++i) {
         ui->treeView->hideColumn(i);
     }
     ui->treeView->setHeaderHidden(true);
@@ -47,6 +47,8 @@ void MainWindow::on_actionOpen_Folder_triggered() {
                                                     QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
     auto index = dynamic_cast<QFileSystemModel *>(ui->treeView->model())->index(dir);
     ui->treeView->setRootIndex(index);
+    ui->treeView->showColumn(0);
+//    ui->treeView->hideColumn(0);
 }
 
 void MainWindow::on_actionSettings_triggered() {

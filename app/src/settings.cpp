@@ -1,4 +1,5 @@
 #include "settings.h"
+#include "Connecter.h"
 
 Settings::Settings() {
     QFontDatabase db;
@@ -19,10 +20,21 @@ Settings::Settings() {
     m_allSettings["theme"] = themes << "Default" << "Light" << "Dark";
     m_allSettings["language"] = languages << "English" << "Russian" << "Ukraine";
 
+    m_settings->beginGroup("Preferences");
     m_preferences["font"] = m_settings->value("font", "Tahoma").toString();
     m_preferences["size_font"] = m_settings->value("size_font", 10).toString();
     m_preferences["theme"] = m_settings->value("theme", "Default").toString();
     m_preferences["language"] = m_settings->value("language", "English").toString();
+    m_settings->endGroup();
+
+//    for (const auto& i : m_allSettings) {
+//        qDebug() << i;
+//    }
+//
+//    for (const auto& i : m_preferences) {
+//        qDebug() << i;
+//    }
+    Connecter::instance().setSettings(this);
 }
 
 QMap<QString, QString> &Settings::getPreferences() {
@@ -33,4 +45,10 @@ QSettings *Settings::getSettings() {
 }
 void Settings::setPreferences(const QMap<QString, QString>& preferences) {
     m_preferences.insert(preferences);
+}
+
+void Settings::applySettingsToEditor(TextEditor *editor) {
+    QFont font(m_preferences["font"]);
+    font.setPointSize(m_preferences["size_font"].toInt());
+    editor->setFont(font);
 }

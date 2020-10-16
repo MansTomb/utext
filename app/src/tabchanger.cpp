@@ -2,6 +2,7 @@
 #include "texteditor.h"
 #include "emptywidget.h"
 #include "editorlayout.h"
+#include "Connecter.h"
 
 #include <QDebug>
 #include <QMenu>
@@ -75,6 +76,7 @@ void TabChanger::AddPage(QString label, QFile *file) {
     connect(editorLayout->editor(), &TextEditor::InFocus, this, [=]{emit TabFocused(this);});
     insertTab(0, editorLayout, label);
     setCurrentIndex(0);
+    Connecter::instance().getSettings()->applySettingsToEditor(editorLayout->editor());
 }
 
 void TabChanger::AddPage(QWidget *editor) {
@@ -82,6 +84,7 @@ void TabChanger::AddPage(QWidget *editor) {
 
     connect(editorLayout->editor(), &TextEditor::InFocus, this, [=]{emit TabFocused(this);});
     insertTab(0, editorLayout, editorLayout->file()->fileName().remove(0, editorLayout->file()->fileName().lastIndexOf('/') + 1));
+    Connecter::instance().getSettings()->applySettingsToEditor(editorLayout->editor());
 }
 
 void TabChanger::CloseTab(int index) {
