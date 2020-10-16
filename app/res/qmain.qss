@@ -1,7 +1,0 @@
-QTreeView {
-   background-color: #040F2A;
-}
-
-Preferences {
-   background-color: #573FA1;
-}

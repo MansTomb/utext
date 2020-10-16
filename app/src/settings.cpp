@@ -40,9 +40,11 @@ Settings::Settings() {
 QMap<QString, QString> &Settings::getPreferences() {
     return m_preferences;
 }
+
 QSettings *Settings::getSettings() {
     return m_settings;
 }
+
 void Settings::setPreferences(const QMap<QString, QString>& preferences) {
     m_preferences.insert(preferences);
 }
@@ -51,4 +53,13 @@ void Settings::applySettingsToEditor(TextEditor *editor) {
     QFont font(m_preferences["font"]);
     font.setPointSize(m_preferences["size_font"].toInt());
     editor->setFont(font);
+}
+
+void Settings::applyTheme(const QString& nameTheme) {
+    QFile File(":/qss/" + nameTheme + ".qss");
+    File.open(QFile::ReadOnly);
+    QString StyleSheet;
+
+    StyleSheet = QLatin1String(File.readAll());
+    qApp->setStyleSheet(StyleSheet);
 }

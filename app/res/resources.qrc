@@ -1,5 +1,7 @@
 <!DOCTYPE RCC><RCC version="1.0">
     <qresource>
-        <file>qmain.qss</file>
+        <file>qss/Default.qss</file>
+        <file>qss/Light.qss</file>
+        <file>qss/Dark.qss</file>
     </qresource>
 </RCC>

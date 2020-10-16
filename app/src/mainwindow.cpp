@@ -11,6 +11,7 @@ MainWindow::MainWindow(const QString& name, QWidget *parent)
 
     //Preferences
     preferences = new Settings;
+    preferences->applyTheme(preferences->getPreferences()["theme"]);
     initSettings();
     loadSettings();
 
@@ -48,7 +49,6 @@ void MainWindow::on_actionOpen_Folder_triggered() {
     auto index = dynamic_cast<QFileSystemModel *>(ui->treeView->model())->index(dir);
     ui->treeView->setRootIndex(index);
     ui->treeView->showColumn(0);
-//    ui->treeView->hideColumn(0);
 }
 
 void MainWindow::on_actionSettings_triggered() {
