@@ -8,7 +8,7 @@
 #include <QWindow>
 #include <QFontMetrics>
 
-#include "highligher.h"
+#include "cpphighligher.h"
 
 class Filter : public QObject {
  Q_OBJECT
@@ -22,6 +22,10 @@ class TextEditor : public QTextEdit {
     void focusInEvent(QFocusEvent *e) override;
  public:
     explicit TextEditor(QFile *file, QWidget *parent = Q_NULLPTR);
+    void SearchInText(QString from, bool isRegex);
+    void ReplaceInText(QString from, QString to, bool isRegex);
+    void Save();
+    void SaveAtExit();
     QFile *file();
  public slots:
     void addText();
@@ -34,9 +38,8 @@ class TextEditor : public QTextEdit {
     void redo();
  signals:
     void InFocus(QWidget *widget);
-    void TriggerSearch();
-    void TriggerReplace();
+    void TriggerSearch(QString selectedText);
+    void TriggerReplace(QString selectedText);
  private:
-    Highlighter *m_highlighter = Q_NULLPTR;
     QFile *m_file = Q_NULLPTR;
 };

@@ -3,12 +3,12 @@
 #include <QtGui/QSyntaxHighlighter>
 #include <QtCore/QRegularExpression>
 
-class Highlighter : public QSyntaxHighlighter
+class CppHighLighter : public QSyntaxHighlighter
 {
     Q_OBJECT
 
  public:
-    explicit Highlighter(QTextDocument *parent = 0);
+    explicit CppHighLighter(QTextDocument *parent = 0);
 
  protected:
     void highlightBlock(const QString &text) override;

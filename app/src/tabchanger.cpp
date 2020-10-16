@@ -2,6 +2,7 @@
 #include "texteditor.h"
 #include "emptywidget.h"
 #include "editorlayout.h"
+#include "Connecter.h"
 
 #include <QDebug>
 #include <QMenu>
@@ -44,8 +45,8 @@ void TabChanger::dropEvent(QDropEvent *event) {
 
 void TabChanger::ShowContextMenu(const QPoint& pos) {
     QMenu contextMenu(tr("Context menu"), this);
-    QAction action1("Split Horizontaly", this);
-    QAction action2("Split Verticaly", this);
+    QAction action1(tr("Split Horizontaly"), this);
+    QAction action2(tr("Split Verticaly"), this);
 
     contextMenu.addAction(&action1);
     connect(&action1, &QAction::triggered, this, [=] { SplitHorizontaly(m_x + 1, m_y, dynamic_cast<EditorLayout *>(currentWidget())->editor());});
@@ -68,13 +69,14 @@ void TabChanger::AddPage(QString label, QFile *file) {
 
     for (const auto &item : findChildren<TextEditor *>()) {
         if (dynamic_cast<TextEditor *>(item)->file()->fileName() == file->fileName()) {
-            setCurrentWidget(item);
+            setCurrentWidget(item->parentWidget());
             return;
         }
     }
     connect(editorLayout->editor(), &TextEditor::InFocus, this, [=]{emit TabFocused(this);});
     insertTab(0, editorLayout, label);
     setCurrentIndex(0);
+    Connecter::instance().getSettings()->applySettingsToEditor(editorLayout->editor());
 }
 
 void TabChanger::AddPage(QWidget *editor) {
@@ -82,10 +84,12 @@ void TabChanger::AddPage(QWidget *editor) {
 
     connect(editorLayout->editor(), &TextEditor::InFocus, this, [=]{emit TabFocused(this);});
     insertTab(0, editorLayout, editorLayout->file()->fileName().remove(0, editorLayout->file()->fileName().lastIndexOf('/') + 1));
+    Connecter::instance().getSettings()->applySettingsToEditor(editorLayout->editor());
 }
 
 void TabChanger::CloseTab(int index) {
     auto editor = widget(index);
+    dynamic_cast<EditorLayout *>(editor)->editor()->SaveAtExit();
     removeTab(index);
     delete editor;
 }

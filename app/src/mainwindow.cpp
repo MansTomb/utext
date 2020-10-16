@@ -11,6 +11,7 @@ MainWindow::MainWindow(const QString& name, QWidget *parent)
 
     //Preferences
     preferences = new Settings;
+    preferences->applyTheme(preferences->getPreferences()["theme"]);
     initSettings();
     loadSettings();
 
@@ -23,7 +24,7 @@ MainWindow::MainWindow(const QString& name, QWidget *parent)
 
     //View file system
     ui->treeView->setModel(m_dirmodel);
-    for (int i = 1; i < m_dirmodel->columnCount(); ++i) {
+    for (int i = 0; i < m_dirmodel->columnCount(); ++i) {
         ui->treeView->hideColumn(i);
     }
     ui->treeView->setHeaderHidden(true);
@@ -34,19 +35,26 @@ MainWindow::~MainWindow() {
     saveSettings();
     delete settings;
     delete ui;
+    system("leaks -q utext");
 }
 
 void MainWindow::on_actionOpen_File_triggered() {
     QString file = QFileDialog::getOpenFileName(this, tr("Open File"), "/home");
-    auto *ffile = new QFile(file);
-    ui->widget->AddPageToLastFocus(file.remove(0, file.lastIndexOf('/') + 1), ffile);
+    if (!file.isEmpty()) {
+        auto *ffile = new QFile(file);
+        ui->widget->AddPageToLastFocus(file.remove(0,file.lastIndexOf('/') + 1), ffile);
+    }
 }
 
 void MainWindow::on_actionOpen_Folder_triggered() {
     QString dir = QFileDialog::getExistingDirectory(this, "Open Directory", "/home",
                                                     QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
-    auto index = dynamic_cast<QFileSystemModel *>(ui->treeView->model())->index(dir);
-    ui->treeView->setRootIndex(index);
+    if (!dir.isEmpty()) {
+        auto index =
+            dynamic_cast<QFileSystemModel *>(ui->treeView->model())->index(dir);
+        ui->treeView->setRootIndex(index);
+        ui->treeView->showColumn(0);
+    }
 }
 
 void MainWindow::on_actionSettings_triggered() {
@@ -80,6 +88,7 @@ void MainWindow::saveSettings() {
 void MainWindow::ProcessPreferences(const QMap<QString, QString>& preferencesDialog) {
     preferences->setPreferences(preferencesDialog);
     saveSettings();
+    preferences->applyTheme(preferencesDialog["theme"]);
     for (auto &item : findChildren<TextEditor *>()) {
         QFont font(preferencesDialog["font"]);
         font.setPointSize(preferencesDialog["size_font"].toInt());
@@ -91,3 +100,14 @@ void MainWindow::initSettings() {
     settings = preferences->getSettings();
 }
 
+void MainWindow::closeEvent(QCloseEvent *event) {
+    for (const auto &item : findChildren<TextEditor *>())
+        item->SaveAtExit();
+
+    QWidget::closeEvent(event);
+}
+
+void MainWindow::SaveAllFiles() {
+    for (const auto &item : findChildren<TextEditor *>())
+        item->Save();
+}

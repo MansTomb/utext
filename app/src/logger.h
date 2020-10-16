@@ -9,7 +9,7 @@
 #include <QFontMetrics>
 #include <QDate>
 
-#include "highligher.h"
+#include "cpphighligher.h"
 
 class Logger : public QTextEdit {
     Q_OBJECT

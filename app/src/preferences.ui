@@ -7,47 +7,22 @@
     <x>0</x>
     <y>0</y>
     <width>355</width>
-    <height>321</height>
+    <height>239</height>
    </rect>
   </property>
+  <property name="cursor">
+   <cursorShape>CrossCursor</cursorShape>
+  </property>
+  <property name="mouseTracking">
+   <bool>false</bool>
+  </property>
+  <property name="focusPolicy">
+   <enum>Qt::NoFocus</enum>
+  </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Preferences uText</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
-   <item>
-    <widget class="QLabel" name="label">
-     <property name="enabled">
-      <bool>true</bool>
-     </property>
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="minimumSize">
-      <size>
-       <width>0</width>
-       <height>20</height>
-      </size>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">Text {
-    color: &quot;blue&quot;
-    font.family: &quot;Arial&quot;
-    font.bold: true
-    font.italic: true
-    font.pixelSize: 12
-}</string>
-     </property>
-     <property name="text">
-      <string>Prefences uText:</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignCenter</set>
-     </property>
-    </widget>
-   </item>
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
@@ -59,7 +34,7 @@
         </sizepolicy>
        </property>
        <property name="text">
-        <string>Шрифт:</string>
+        <string>Font:</string>
        </property>
       </widget>
      </item>
@@ -86,7 +61,7 @@
         </sizepolicy>
        </property>
        <property name="text">
-        <string>Размер шрифта:</string>
+        <string>Font size:</string>
        </property>
       </widget>
      </item>
@@ -113,7 +88,7 @@
         </sizepolicy>
        </property>
        <property name="text">
-        <string>Тема:</string>
+        <string>Theme:</string>
        </property>
       </widget>
      </item>
@@ -140,7 +115,7 @@
         </sizepolicy>
        </property>
        <property name="text">
-        <string>Язык:</string>
+        <string>Language:</string>
        </property>
       </widget>
      </item>

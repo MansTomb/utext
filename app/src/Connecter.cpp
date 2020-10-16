@@ -16,6 +16,7 @@ void Connecter::ConnectToolBarToEditor(TextEditor *editor) {
     QObject::connect(actions[6], &QAction::triggered, editor, &TextEditor::replace);
     QObject::connect(actions[8], &QAction::triggered, editor, &TextEditor::undo);
     QObject::connect(actions[9], &QAction::triggered, editor, &TextEditor::redo);
+    QObject::connect(actions[10], &QAction::triggered, editor, &TextEditor::Save);
 }
 
 void Connecter::setToolbar(QToolBar *tb) {
@@ -28,4 +29,12 @@ void Connecter::setLogger(Logger *logger) {
 
 Logger *Connecter::getLogger() {
     return m_logger;
+}
+
+void Connecter::setSettings(Settings *settings) {
+    m_setttings = settings;
+}
+
+Settings *Connecter::getSettings() {
+    return m_setttings;
 }
