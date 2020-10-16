@@ -89,6 +89,7 @@ void TabChanger::AddPage(QWidget *editor) {
 
 void TabChanger::CloseTab(int index) {
     auto editor = widget(index);
+    dynamic_cast<EditorLayout *>(editor)->editor()->SaveAtExit();
     removeTab(index);
     delete editor;
 }
