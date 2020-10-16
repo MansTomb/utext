@@ -1,14 +1,12 @@
 #include "editorlayout.h"
 
 EditorLayout::EditorLayout(QFile *file, QWidget *parent) : m_file(file), QWidget(parent) {
-    m_editor = new TextEditor(m_file);
-    m_search = new QLineEdit;
-    m_replace = new QLineEdit;
+    m_editor = new TextEditor(m_file, this);
+    m_search = new SearchBar(this);
+    m_replace = new ReplaceBar(this);
 
-    m_search->setHidden(true);
-    m_replace->setHidden(true);
-    m_search->setPlaceholderText("Search");
-    m_replace->setPlaceholderText("Replace");
+    m_search->Hidden(true);
+    m_replace->Hidden(true);
     setLayout(new QVBoxLayout(this));
     layout()->setMargin(0);
     layout()->setSpacing(0);
@@ -16,10 +14,9 @@ EditorLayout::EditorLayout(QFile *file, QWidget *parent) : m_file(file), QWidget
     layout()->addWidget(m_replace);
     layout()->addWidget(m_editor);
 
-    connect(m_search, &QLineEdit::returnPressed, this, [=]{emit MyReturnSearchPressed(m_search->text(), m_replace->text());});
-    connect(m_replace, &QLineEdit::returnPressed, this, [=]{emit MyReturnReplacePressed(m_search->text(), m_replace->text());});
-    connect(this, &EditorLayout::MyReturnSearchPressed, m_editor, &TextEditor::SearchInText);
-    connect(this, &EditorLayout::MyReturnReplacePressed, m_editor, &TextEditor::ReplaceInText);
+    connect(m_search, &SearchBar::MyReturnPressed, m_editor, &TextEditor::SearchInText);
+    connect(m_replace, &ReplaceBar::MyReturnPressed, this, [=]{emit PipeForReplace(m_search->getText(), m_replace->getText(), m_search->isRegex());});
+    connect(this, &EditorLayout::PipeForReplace, m_editor, &TextEditor::ReplaceInText);
     connect(m_editor, &TextEditor::TriggerSearch, this, &EditorLayout::setSearchHidden);
     connect(m_editor, &TextEditor::TriggerReplace, this, &EditorLayout::setReplaceHidden);
 }
@@ -34,23 +31,23 @@ TextEditor *EditorLayout::editor() {
 
 void EditorLayout::setSearchHidden(QString selectedText) {
     if (m_search->isHidden()) {
-        m_search->setHidden(false);
+        m_search->Hidden(false);
         m_search->setText(selectedText);
     }
     else {
-        m_search->setHidden(true);
-        m_replace->setHidden(true);
+        m_search->Hidden(true);
+        m_replace->Hidden(true);
     }
 }
 
 void EditorLayout::setReplaceHidden(QString selectedText) {
     if (m_replace->isHidden()) {
-        m_search->setHidden(false);
-        m_replace->setHidden(false);
+        m_search->Hidden(false);
+        m_replace->Hidden(false);
         m_search->setText(selectedText);
     }
     else {
-        m_search->setHidden(true);
-        m_replace->setHidden(true);
+        m_search->Hidden(true);
+        m_replace->Hidden(true);
     }
 }

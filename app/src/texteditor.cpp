@@ -56,7 +56,7 @@ void TextEditor::redo() {
 QFile *TextEditor::file() {
     return m_file;
 }
-void TextEditor::SearchInText(QString from, QString to) {
+void TextEditor::SearchInText(QString from, bool isRegex) {
     QList<QTextEdit::ExtraSelection> extraSelections;
     static QTextCursor cursor(document());
 
@@ -66,7 +66,7 @@ void TextEditor::SearchInText(QString from, QString to) {
     if(!isReadOnly())
     {
         QColor color = QColor(Qt::gray).lighter(130);
-        cursor = document()->find(from, cursor);
+        isRegex ? cursor = document()->find(QRegExp(from), cursor) : cursor = document()->find(from, cursor);
         if (!cursor.isNull()) {
             QTextEdit::ExtraSelection extra;
             extra.format.setBackground(color);
@@ -77,7 +77,7 @@ void TextEditor::SearchInText(QString from, QString to) {
     setExtraSelections(extraSelections);
 }
 
-void TextEditor::ReplaceInText(QString from, QString to) {
+void TextEditor::ReplaceInText(QString from, QString to, bool isRegex) {
     textCursor().beginEditBlock();
     static QTextCursor cursor(document());
 
@@ -85,7 +85,7 @@ void TextEditor::ReplaceInText(QString from, QString to) {
         cursor = QTextCursor(document());
 
     if (!isReadOnly()) {
-        cursor = document()->find(from, cursor);
+        isRegex ? cursor = document()->find(QRegExp(from), cursor) : cursor = document()->find(from, cursor);
         if (!cursor.isNull()) {
             cursor.insertText(to);
         }

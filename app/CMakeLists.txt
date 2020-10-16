@@ -15,11 +15,11 @@ find_package(Qt5 COMPONENTS Widgets REQUIRED)
 set(SOURCES main.cpp src/Connecter.cpp src/emptywidget.cpp
     src/highligher.cpp src/mainwindow.cpp src/preferences.cpp
     src/projectview.cpp src/tabchanger.cpp src/texteditor.cpp
-    src/logger.cpp src/editorlayout.cpp src/settings.cpp)
+    src/logger.cpp src/editorlayout.cpp src/settings.cpp src/search.cpp src/replace.cpp)
 set(HEADERS src/mainwindow.h src/Connecter.h src/emptywidget.h
     src/highligher.h src/mainwindow.h src/projectview.h
     src/preferences.h src/tabchanger.h src/texteditor.h
-    src/logger.h src/editorlayout.h src/settings.h)
+    src/logger.h src/editorlayout.h src/settings.h src/search.h src/replace.h)
 set(UI src/mainwindow.ui src/preferences.ui)
 
 include_directories(../cmake-build-debug/app/src/src_autogen/include)

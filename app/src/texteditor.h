@@ -22,8 +22,8 @@ class TextEditor : public QTextEdit {
     void focusInEvent(QFocusEvent *e) override;
  public:
     explicit TextEditor(QFile *file, QWidget *parent = Q_NULLPTR);
-    void SearchInText(QString from, QString to);
-    void ReplaceInText(QString from, QString to);
+    void SearchInText(QString from, bool isRegex);
+    void ReplaceInText(QString from, QString to, bool isRegex);
     QFile *file();
  public slots:
     void addText();

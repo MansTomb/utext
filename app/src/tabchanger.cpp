@@ -68,7 +68,7 @@ void TabChanger::AddPage(QString label, QFile *file) {
 
     for (const auto &item : findChildren<TextEditor *>()) {
         if (dynamic_cast<TextEditor *>(item)->file()->fileName() == file->fileName()) {
-            setCurrentWidget(item);
+            setCurrentWidget(item->parentWidget());
             return;
         }
     }
