@@ -3,8 +3,8 @@
 CppHighLighter::CppHighLighter(QTextDocument *parent) : QSyntaxHighlighter(parent) {
     HighlightingRule rule;
 
-    keywordFormat.setForeground(QColor("#0F6939"));
-    keywordFormat.setFontWeight(QFont::Bold);
+    keywordFormat.setForeground(QColor("#E5AC40"));
+//    keywordFormat.setFontWeight(QFont::Bold);
     const QString keywordPatterns[] = {
         QStringLiteral("\\bchar\\b"), QStringLiteral("\\bclass\\b"), QStringLiteral("\\bconst\\b"),
         QStringLiteral("\\bdouble\\b"), QStringLiteral("\\benum\\b"), QStringLiteral("\\bexplicit\\b"),
@@ -15,7 +15,8 @@ CppHighLighter::CppHighLighter(QTextDocument *parent) : QSyntaxHighlighter(paren
         QStringLiteral("\\bslots\\b"), QStringLiteral("\\bstatic\\b"), QStringLiteral("\\bstruct\\b"),
         QStringLiteral("\\btemplate\\b"), QStringLiteral("\\btypedef\\b"), QStringLiteral("\\btypename\\b"),
         QStringLiteral("\\bunion\\b"), QStringLiteral("\\bunsigned\\b"), QStringLiteral("\\bvirtual\\b"),
-        QStringLiteral("\\bvoid\\b"), QStringLiteral("\\bvolatile\\b"), QStringLiteral("\\bbool\\b")
+        QStringLiteral("\\bvoid\\b"), QStringLiteral("\\bvolatile\\b"), QStringLiteral("\\bbool\\b"),
+        QStringLiteral("\\bauto\\b")
     };
     for (const QString &pattern : keywordPatterns) {
         rule.pattern = QRegularExpression(pattern);
