@@ -39,11 +39,11 @@ void TextEditor::cut() {
 }
 void TextEditor::find() {
     if (hasFocus())
-        emit TriggerSearch();
+        emit TriggerSearch(textCursor().selectedText());
 }
 void TextEditor::replace() {
     if (hasFocus())
-        emit TriggerReplace();
+        emit TriggerReplace(textCursor().selectedText());
 }
 void TextEditor::undo() {
     if (hasFocus())
@@ -55,4 +55,40 @@ void TextEditor::redo() {
 }
 QFile *TextEditor::file() {
     return m_file;
+}
+void TextEditor::SearchInText(QString from, QString to) {
+    QList<QTextEdit::ExtraSelection> extraSelections;
+    static QTextCursor cursor(document());
+
+    if (cursor.isNull())
+        cursor = QTextCursor(document());
+
+    if(!isReadOnly())
+    {
+        QColor color = QColor(Qt::gray).lighter(130);
+        cursor = document()->find(from, cursor);
+        if (!cursor.isNull()) {
+            QTextEdit::ExtraSelection extra;
+            extra.format.setBackground(color);
+            extra.cursor = cursor;
+            extraSelections.append(extra);
+        }
+    }
+    setExtraSelections(extraSelections);
+}
+
+void TextEditor::ReplaceInText(QString from, QString to) {
+    textCursor().beginEditBlock();
+    static QTextCursor cursor(document());
+
+    if (cursor.isNull())
+        cursor = QTextCursor(document());
+
+    if (!isReadOnly()) {
+        cursor = document()->find(from, cursor);
+        if (!cursor.isNull()) {
+            cursor.insertText(to);
+        }
+    }
+    textCursor().endEditBlock();
 }

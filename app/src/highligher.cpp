@@ -34,7 +34,6 @@ Highlighter::Highlighter(QTextDocument *parent) : QSyntaxHighlighter(parent) {
     rule.format = quotationFormat;
     highlightingRules.append(rule);
 
-    functionFormat.setFontItalic(true);
     functionFormat.setForeground(Qt::blue);
     rule.pattern = QRegularExpression(QStringLiteral("\\b[A-Za-z0-9_]+(?=\\()"));
     rule.format = functionFormat;
