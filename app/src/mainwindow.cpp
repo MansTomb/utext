@@ -39,16 +39,21 @@ MainWindow::~MainWindow() {
 
 void MainWindow::on_actionOpen_File_triggered() {
     QString file = QFileDialog::getOpenFileName(this, tr("Open File"), "/home");
-    auto *ffile = new QFile(file);
-    ui->widget->AddPageToLastFocus(file.remove(0, file.lastIndexOf('/') + 1), ffile);
+    if (!file.isEmpty()) {
+        auto *ffile = new QFile(file);
+        ui->widget->AddPageToLastFocus(file.remove(0,file.lastIndexOf('/') + 1), ffile);
+    }
 }
 
 void MainWindow::on_actionOpen_Folder_triggered() {
     QString dir = QFileDialog::getExistingDirectory(this, "Open Directory", "/home",
                                                     QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
-    auto index = dynamic_cast<QFileSystemModel *>(ui->treeView->model())->index(dir);
-    ui->treeView->setRootIndex(index);
-    ui->treeView->showColumn(0);
+    if (!dir.isEmpty()) {
+        auto index =
+            dynamic_cast<QFileSystemModel *>(ui->treeView->model())->index(dir);
+        ui->treeView->setRootIndex(index);
+        ui->treeView->showColumn(0);
+    }
 }
 
 void MainWindow::on_actionSettings_triggered() {
@@ -82,6 +87,7 @@ void MainWindow::saveSettings() {
 void MainWindow::ProcessPreferences(const QMap<QString, QString>& preferencesDialog) {
     preferences->setPreferences(preferencesDialog);
     saveSettings();
+    preferences->applyTheme(preferencesDialog["theme"]);
     for (auto &item : findChildren<TextEditor *>()) {
         QFont font(preferencesDialog["font"]);
         font.setPointSize(preferencesDialog["size_font"].toInt());

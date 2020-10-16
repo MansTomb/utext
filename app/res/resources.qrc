@@ -3,5 +3,6 @@
         <file>qss/Default.qss</file>
         <file>qss/Light.qss</file>
         <file>qss/Dark.qss</file>
+        <file>qss/Obit.qss</file>
     </qresource>
 </RCC>

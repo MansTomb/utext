@@ -17,7 +17,7 @@ Settings::Settings() {
     }
     m_allSettings["font"] = db.families();
     m_allSettings["size"] = sizes;
-    m_allSettings["theme"] = themes << "Default" << "Light" << "Dark";
+    m_allSettings["theme"] = themes << "Default" << "Light" << "Dark" << "Obit";
     m_allSettings["language"] = languages << "English" << "Russian" << "Ukraine";
 
     m_settings->beginGroup("Preferences");
@@ -27,13 +27,6 @@ Settings::Settings() {
     m_preferences["language"] = m_settings->value("language", "English").toString();
     m_settings->endGroup();
 
-//    for (const auto& i : m_allSettings) {
-//        qDebug() << i;
-//    }
-//
-//    for (const auto& i : m_preferences) {
-//        qDebug() << i;
-//    }
     Connecter::instance().setSettings(this);
 }
 

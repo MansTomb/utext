@@ -39,16 +39,16 @@ void Preferences::setSizeFont() {
 
 void Preferences::setTheme() {
     QStringList themes;
-    themes << "Default" << "Light" << "Dark";
+    themes << "Default" << "Light" << "Dark" << "Obit";
     ui->comboBox_3->addItems(themes);
-    ui->comboBox_2->setCurrentIndex(themes.indexOf(m_preferences["theme"]));
+    ui->comboBox_3->setCurrentIndex(themes.indexOf(m_preferences["theme"]));
 }
 
 void Preferences::setLanguage() {
     QStringList languages;
     languages << "Russian" << "English" << "Ukraine";
     ui->comboBox_4->addItems(languages);
-    ui->comboBox_2->setCurrentIndex(languages.indexOf(m_preferences["language"]));
+    ui->comboBox_4->setCurrentIndex(languages.indexOf(m_preferences["language"]));
 }
 
 void Preferences::accept() {
