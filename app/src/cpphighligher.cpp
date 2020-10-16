@@ -1,6 +1,6 @@
-#include "highligher.h"
+#include "cpphighligher.h"
 
-Highlighter::Highlighter(QTextDocument *parent) : QSyntaxHighlighter(parent) {
+CppHighLighter::CppHighLighter(QTextDocument *parent) : QSyntaxHighlighter(parent) {
     HighlightingRule rule;
 
     keywordFormat.setForeground(Qt::darkBlue);
@@ -49,7 +49,7 @@ Highlighter::Highlighter(QTextDocument *parent) : QSyntaxHighlighter(parent) {
     commentStartExpression = QRegularExpression(QStringLiteral("/\\*"));
     commentEndExpression = QRegularExpression(QStringLiteral("\\*/"));
 }
-void Highlighter::highlightBlock(const QString &text) {
+void CppHighLighter::highlightBlock(const QString &text) {
     for (const HighlightingRule &rule : qAsConst(highlightingRules)) {
         QRegularExpressionMatchIterator matchIterator = rule.pattern.globalMatch(text);
         while (matchIterator.hasNext()) {
@@ -76,4 +76,3 @@ void Highlighter::highlightBlock(const QString &text) {
         startIndex = text.indexOf(commentStartExpression, startIndex + commentLength);
     }
 }
-

@@ -1,10 +1,15 @@
 #include <QtGui/QPainter>
 #include <QtGui/QTextBlock>
+
 #include "texteditor.h"
 #include "Connecter.h"
+#include "htmlhighlighter.h"
 
 TextEditor::TextEditor(QFile *file, QWidget *parent) : m_file(file), QTextEdit(parent) {
-    m_highlighter = new Highlighter(document());
+    if (m_file->fileName().remove(0, m_file->fileName().lastIndexOf(".")) == ".cpp")
+        new CppHighLighter(document());
+    else
+        new HtmlHighLighter(document());
     installEventFilter(new Filter);
     Connecter::instance().ConnectToolBarToEditor(this);
     file->open(QIODevice::ReadWrite);
