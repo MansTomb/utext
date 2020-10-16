@@ -26,6 +26,7 @@ Settings::Settings() {
     m_preferences["theme"] = m_settings->value("theme", "Default").toString();
     m_preferences["language"] = m_settings->value("language", "English").toString();
     m_settings->endGroup();
+    checkValidPreferences();
 
     Connecter::instance().setSettings(this);
 }
@@ -55,4 +56,11 @@ void Settings::applyTheme(const QString& nameTheme) {
 
     StyleSheet = QLatin1String(File.readAll());
     qApp->setStyleSheet(StyleSheet);
+}
+
+void Settings::checkValidPreferences() {
+    m_allSettings["font"].contains(m_preferences["font"]) ? m_preferences["font"] : m_preferences["font"] = "Tahoma";
+    m_allSettings["size_font"].contains(m_preferences["size_font"]) ? m_preferences["size_font"] : m_preferences["size_font"] = "12";
+    m_allSettings["theme"].contains(m_preferences["theme"]) ? m_preferences["theme"] : m_preferences["theme"] = "Default";
+    m_allSettings["language"].contains(m_preferences["language"]) ? m_preferences["language"] : m_preferences["language"] = "English";
 }
