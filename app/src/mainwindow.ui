@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>938</width>
-    <height>551</height>
+    <width>1290</width>
+    <height>574</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -15,16 +15,34 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
+    <property name="leftMargin">
+     <number>0</number>
+    </property>
+    <property name="topMargin">
+     <number>0</number>
+    </property>
+    <property name="rightMargin">
+     <number>0</number>
+    </property>
+    <property name="bottomMargin">
+     <number>0</number>
+    </property>
+    <property name="spacing">
+     <number>0</number>
+    </property>
     <item row="0" column="0">
      <widget class="QSplitter" name="splitter">
       <property name="sizePolicy">
-       <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
         <horstretch>0</horstretch>
         <verstretch>0</verstretch>
        </sizepolicy>
       </property>
       <property name="orientation">
        <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="handleWidth">
+       <number>1</number>
       </property>
       <widget class="ProjectView" name="treeView">
        <property name="sizePolicy">
@@ -52,7 +70,33 @@
         </size>
        </property>
       </widget>
-      <widget class="EmptyWidget" name="widget" native="true"/>
+      <widget class="EmptyWidget" name="widget" native="true">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+      </widget>
+     </widget>
+    </item>
+    <item row="1" column="0">
+     <widget class="Logger" name="textEdit">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>300</height>
+       </size>
+      </property>
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
      </widget>
     </item>
    </layout>
@@ -62,7 +106,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>938</width>
+     <width>1290</width>
      <height>22</height>
     </rect>
    </property>
@@ -75,6 +119,7 @@
     <addaction name="actionOpen_Logger"/>
     <addaction name="actionSave_All"/>
     <addaction name="actionSettings"/>
+    <addaction name="actionHide_ToolBar"/>
    </widget>
    <widget class="QMenu" name="menuEdit">
     <property name="title">
@@ -220,6 +265,9 @@
    </property>
   </action>
   <action name="actionOpen_Logger">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>Open Logger</string>
    </property>
@@ -307,6 +355,17 @@
     <string>Ctrl+Shift+A</string>
    </property>
   </action>
+  <action name="actionHide_ToolBar">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Hide ToolBar</string>
+   </property>
+   <property name="shortcut">
+    <string>Alt+Shift+T</string>
+   </property>
+  </action>
  </widget>
  <customwidgets>
   <customwidget>
@@ -320,9 +379,79 @@
    <header>emptywidget.h</header>
    <container>1</container>
   </customwidget>
+  <customwidget>
+   <class>Logger</class>
+   <extends>QTextEdit</extends>
+   <header>logger.h</header>
+  </customwidget>
  </customwidgets>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>actionHide_ToolBar</sender>
+   <signal>triggered(bool)</signal>
+   <receiver>toolBar</receiver>
+   <slot>setHidden(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>468</x>
+     <y>33</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionOpen_Logger</sender>
+   <signal>triggered(bool)</signal>
+   <receiver>textEdit</receiver>
+   <slot>setHidden(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>644</x>
+     <y>421</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionFind_2</sender>
+   <signal>triggered()</signal>
+   <receiver>actionFind</receiver>
+   <slot>trigger()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionReplace_2</sender>
+   <signal>triggered()</signal>
+   <receiver>actionReplace</receiver>
+   <slot>trigger()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
  <slots>
   <slot>ChangeTheme(bool)</slot>
  </slots>

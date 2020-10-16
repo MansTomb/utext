@@ -7,7 +7,6 @@ TextEditor::TextEditor(QFile *file, QWidget *parent) : m_file(file), QTextEdit(p
     m_highlighter = new Highlighter(document());
     installEventFilter(new Filter);
     Connecter::instance().ConnectToolBarToEditor(this);
-
     file->open(QIODevice::ReadWrite);
     setPlainText(file->readAll());
     file->close();
@@ -26,7 +25,6 @@ bool Filter::eventFilter(QObject *object, QEvent *event) {
     return event->type() == QEvent::ShortcutOverride;
 }
 
-
 void TextEditor::copy() {
     if (hasFocus())
         QTextEdit::copy();
@@ -40,10 +38,12 @@ void TextEditor::cut() {
         QTextEdit::cut();
 }
 void TextEditor::find() {
-
+    if (hasFocus())
+        emit TriggerSearch();
 }
 void TextEditor::replace() {
-
+    if (hasFocus())
+        emit TriggerReplace();
 }
 void TextEditor::undo() {
     if (hasFocus())
