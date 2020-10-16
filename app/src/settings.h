@@ -17,6 +17,7 @@ class Settings {
     QSettings* getSettings();
     void setPreferences(const QMap<QString, QString>& preferences);
     void applySettingsToEditor(TextEditor *editor);
+    void applyTheme(const QString& nameTheme);
 
     private:
     QSettings *m_settings;
