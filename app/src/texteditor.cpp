@@ -110,7 +110,7 @@ void TextEditor::SaveAtExit() {
     QMessageBox msg;
     QString text;
 
-    text.append("You wanna save file ").append(file()->fileName().remove(0, file()->fileName().lastIndexOf("/") + 1).append("?"));
+    text.append(tr("You wanna save file ")).append(file()->fileName().remove(0, file()->fileName().lastIndexOf("/") + 1).append("?"));
 
     msg.setText(text);
     msg.setStandardButtons(QMessageBox::Save | QMessageBox::Cancel);

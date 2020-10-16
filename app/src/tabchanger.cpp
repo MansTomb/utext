@@ -45,8 +45,8 @@ void TabChanger::dropEvent(QDropEvent *event) {
 
 void TabChanger::ShowContextMenu(const QPoint& pos) {
     QMenu contextMenu(tr("Context menu"), this);
-    QAction action1("Split Horizontaly", this);
-    QAction action2("Split Verticaly", this);
+    QAction action1(tr("Split Horizontaly"), this);
+    QAction action2(tr("Split Verticaly"), this);
 
     contextMenu.addAction(&action1);
     connect(&action1, &QAction::triggered, this, [=] { SplitHorizontaly(m_x + 1, m_y, dynamic_cast<EditorLayout *>(currentWidget())->editor());});

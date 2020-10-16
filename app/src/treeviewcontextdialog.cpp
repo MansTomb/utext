@@ -5,7 +5,7 @@
 
 TreeViewContextDialog::TreeViewContextDialog(QWidget *parent) : QDialog(parent), ui(new Ui::TreeViewContextDialog) {
     ui->setupUi(this);
-    ui->edit->setPlaceholderText("Write file/folder name here");
+    ui->edit->setPlaceholderText(tr("Write file/folder name here"));
 }
 
 TreeViewContextDialog::~TreeViewContextDialog() {
@@ -18,7 +18,7 @@ void TreeViewContextDialog::accept() {
         return;
     }
     QMessageBox msg;
-    msg.setText("Field cant be empty!");
+    msg.setText(tr("Field cant be empty!"));
     msg.exec();
 }
 QLineEdit *TreeViewContextDialog::getEdit() {
