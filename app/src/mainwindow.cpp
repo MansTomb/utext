@@ -35,6 +35,7 @@ MainWindow::~MainWindow() {
     saveSettings();
     delete settings;
     delete ui;
+    system("leaks -q utext");
 }
 
 void MainWindow::on_actionOpen_File_triggered() {
@@ -110,4 +111,3 @@ void MainWindow::SaveAllFiles() {
     for (const auto &item : findChildren<TextEditor *>())
         item->Save();
 }
-

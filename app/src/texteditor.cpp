@@ -6,7 +6,8 @@
 #include "htmlhighlighter.h"
 
 TextEditor::TextEditor(QFile *file, QWidget *parent) : m_file(file), QTextEdit(parent) {
-    if (m_file->fileName().remove(0, m_file->fileName().lastIndexOf(".")) == ".cpp")
+    QString &extension = m_file->fileName().remove(0, m_file->fileName().lastIndexOf("."));
+    if (extension == ".cpp" || extension == ".h")
         new CppHighLighter(document());
     else
         new HtmlHighLighter(document());
