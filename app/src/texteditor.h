@@ -24,6 +24,8 @@ class TextEditor : public QTextEdit {
     explicit TextEditor(QFile *file, QWidget *parent = Q_NULLPTR);
     void SearchInText(QString from, bool isRegex);
     void ReplaceInText(QString from, QString to, bool isRegex);
+    void Save();
+    void SaveAtExit();
     QFile *file();
  public slots:
     void addText();

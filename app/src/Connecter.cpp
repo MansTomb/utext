@@ -16,6 +16,7 @@ void Connecter::ConnectToolBarToEditor(TextEditor *editor) {
     QObject::connect(actions[6], &QAction::triggered, editor, &TextEditor::replace);
     QObject::connect(actions[8], &QAction::triggered, editor, &TextEditor::undo);
     QObject::connect(actions[9], &QAction::triggered, editor, &TextEditor::redo);
+    QObject::connect(actions[10], &QAction::triggered, editor, &TextEditor::Save);
 }
 
 void Connecter::setToolbar(QToolBar *tb) {

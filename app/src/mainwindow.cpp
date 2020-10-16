@@ -93,3 +93,15 @@ void MainWindow::initSettings() {
     settings = preferences->getSettings();
 }
 
+void MainWindow::closeEvent(QCloseEvent *event) {
+    for (const auto &item : findChildren<TextEditor *>())
+        item->SaveAtExit();
+
+    QWidget::closeEvent(event);
+}
+
+void MainWindow::SaveAllFiles() {
+    for (const auto &item : findChildren<TextEditor *>())
+        item->Save();
+}
+

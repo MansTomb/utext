@@ -92,3 +92,24 @@ void TextEditor::ReplaceInText(QString from, QString to, bool isRegex) {
     }
     textCursor().endEditBlock();
 }
+
+void TextEditor::Save() {
+    auto text = document()->toPlainText();
+
+    file()->open(QIODevice::ReadWrite | QIODevice::Text | QIODevice::Truncate);
+    file()->write(text.toStdString().c_str());
+    file()->close();
+}
+
+void TextEditor::SaveAtExit() {
+    QMessageBox msg;
+    QString text;
+
+    text.append("You wanna save file ").append(file()->fileName().remove(0, file()->fileName().lastIndexOf("/") + 1).append("?"));
+
+    msg.setText(text);
+    msg.setStandardButtons(QMessageBox::Save | QMessageBox::Cancel);
+    msg.setDefaultButton(QMessageBox::Save);
+    if (msg.exec() == QMessageBox::Save)
+        Save();
+}
