@@ -7,7 +7,7 @@ EmptyWidget::EmptyWidget(QWidget *parent) : QWidget(parent){
     gridLayout->setMargin(0);
     setLayout(gridLayout);
     setLayoutDirection(Qt::LayoutDirection::LeftToRight);
-    m_split = new QSplitter(Qt::Orientation::Vertical);
+    m_split = new QSplitter(Qt::Orientation::Vertical, this);
     layout()->addWidget(m_split);
     setAcceptDrops(true);
 }
@@ -28,10 +28,10 @@ void EmptyWidget::addNewWindow(TabChanger *tabs) {
     connect(tabs, &TabChanger::SplitHorizontaly, this, &EmptyWidget::Split);
     connect(tabs, &TabChanger::SplitVerticaly, this, &EmptyWidget::Split);
     while (tabs->y() >= m_split->count()) {
-        m_split->addWidget(new QSplitter(Qt::Orientation::Horizontal));
+        m_split->addWidget(new QSplitter(Qt::Orientation::Horizontal, this));
     }
     if (tabs->y() == -1) {
-        m_split->insertWidget(0, new QSplitter(Qt::Orientation::Horizontal));
+        m_split->insertWidget(0, new QSplitter(Qt::Orientation::Horizontal, this));
         dynamic_cast<QSplitter *>(m_split->widget(0))->insertWidget(tabs->x(), tabs);
     }
     else {
@@ -40,7 +40,7 @@ void EmptyWidget::addNewWindow(TabChanger *tabs) {
 }
 
 void EmptyWidget::Split(const int x, const int y, QWidget *editor) {
-    TabChanger *tab = new TabChanger(x, y);
+    TabChanger *tab = new TabChanger(x, y, this);
 
     connect(tab, &TabChanger::TabFocused, this, &EmptyWidget::LastFocusedTabController);
     addNewWindow(tab);
@@ -57,7 +57,7 @@ void EmptyWidget::AddPageToLastFocus(QString label, QFile *file) {
     else if (m_split->findChild<TabChanger *>())
         m_split->findChild<TabChanger *>()->AddPage(label, file);
     else {
-        TabChanger *tab = new TabChanger(0, 0);
+        TabChanger *tab = new TabChanger(0, 0, this);
         connect(tab, &TabChanger::TabFocused, this, &EmptyWidget::LastFocusedTabController);
         addNewWindow(tab);
         tab->AddPage(label, file);
