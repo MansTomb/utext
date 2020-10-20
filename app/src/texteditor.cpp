@@ -1,9 +1,11 @@
 #include <QtGui/QPainter>
 #include <QtGui/QTextBlock>
+#include <QErrorMessage>
 
 #include "texteditor.h"
 #include "Connecter.h"
 #include "htmlhighlighter.h"
+#include "editorlayout.h"
 
 TextEditor::TextEditor(QFile *file, QWidget *parent) : m_file(file), QTextEdit(parent) {
     QString &extension = m_file->fileName().remove(0, m_file->fileName().lastIndexOf("."));
@@ -13,9 +15,10 @@ TextEditor::TextEditor(QFile *file, QWidget *parent) : m_file(file), QTextEdit(p
         new HtmlHighLighter(document());
     installEventFilter(new Filter);
     Connecter::instance().ConnectToolBarToEditor(this);
-    file->open(QIODevice::ReadWrite);
-    setPlainText(file->readAll());
-    file->close();
+    if (file->open(QIODevice::ReadWrite)) {
+        setPlainText(file->readAll());
+        file->close();
+    }
 }
 
 void TextEditor::addText() {
@@ -103,10 +106,11 @@ void TextEditor::ReplaceInText(QString from, QString to, bool isRegex) {
 void TextEditor::Save() {
     auto text = document()->toPlainText();
 
-    file()->open(QIODevice::ReadWrite | QIODevice::Text | QIODevice::Truncate);
-    file()->write(text.toStdString().c_str());
-    file()->close();
-    m_changed = false;
+    if (file()->open(QIODevice::ReadWrite | QIODevice::Text | QIODevice::Truncate)) {
+        file()->write(text.toStdString().c_str());
+        file()->close();
+        m_changed = false;
+    }
     Connecter::instance().getLogger()->WriteToLog("File Saved");
 }
 

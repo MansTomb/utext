@@ -4,17 +4,14 @@ HtmlHighLighter::HtmlHighLighter(QTextDocument *document)
     : QSyntaxHighlighter(document) {
     QTextCharFormat entityFormat;
     entityFormat.setForeground(QColor(0, 128, 0));
-    entityFormat.setFontWeight(QFont::Bold);
     setFormatFor(Entity, entityFormat);
 
     QTextCharFormat tagFormat;
-    tagFormat.setForeground(QColor(192, 16, 112));
-    tagFormat.setFontWeight(QFont::Bold);
+    tagFormat.setForeground(QColor("#A93CD4"));
     setFormatFor(Tag, tagFormat);
 
     QTextCharFormat commentFormat;
     commentFormat.setForeground(QColor(128, 10, 74));
-    commentFormat.setFontItalic(true);
     setFormatFor(Comment, commentFormat);
 }
 

@@ -60,11 +60,14 @@ void ProjectView::ShowContextMenu(const QPoint &pos) {
 void ProjectView::CreateFile(QString path) {
     auto *dialog = new TreeViewContextDialog(this);
 
+    if (path.isEmpty())
+        path = dynamic_cast<QFileSystemModel *>(model())->filePath(rootIndex());
+
     if (dialog->exec()) {
-        if (!QFileInfo(path).isDir())
-            path.remove(path.lastIndexOf("/"), path.size());
-        else
+        if (QFileInfo(path).isDir())
             path.append("/");
+        else
+            path.remove(path.lastIndexOf("/"), path.size()).append("/");
         QString text = dialog->getEdit()->text();
         QFile file(path + text);
 
@@ -75,11 +78,14 @@ void ProjectView::CreateFile(QString path) {
 void ProjectView::CreateFolder(QString path) {
     TreeViewContextDialog *dialog = new TreeViewContextDialog(this);
 
+    if (path.isEmpty())
+        path = dynamic_cast<QFileSystemModel *>(model())->filePath(rootIndex());
+
     if (dialog->exec()) {
         if (QFileInfo(path).isDir())
             path.append("/");
         else
-            path.remove(path.lastIndexOf("/"), path.size());
+            path.remove(path.lastIndexOf("/"), path.size()).append("/");
         QString text = dialog->getEdit()->text();
         QDir dir;
 

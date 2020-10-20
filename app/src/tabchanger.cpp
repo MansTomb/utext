@@ -8,6 +8,7 @@
 #include <QMenu>
 #include <QSignalMapper>
 #include <QFileInfo>
+#include <QErrorMessage>
 
 TabChanger::TabChanger(int x, int y, QWidget *parent) : m_x(x), m_y(y), QTabWidget(parent) {
     setContextMenuPolicy(Qt::ContextMenuPolicy::CustomContextMenu);
@@ -38,8 +39,15 @@ void TabChanger::dropEvent(QDropEvent *event) {
 
     for (const auto &file : files) {
         QFileInfo finfo(file.toString().remove(0, 7));
-        if (finfo.isFile())
+        QFile opened(finfo.filePath());
+        if (finfo.isFile() && opened.open(QIODevice::ReadOnly))
             AddPage(finfo.fileName(), new QFile(finfo.absoluteFilePath()));
+        else {
+            QErrorMessage msg;
+            msg.showMessage("Cant open file!");
+            msg.exec();
+        }
+        opened.close();
     }
     Connecter::instance().getLogger()->WriteToLog("File Dropped to TabChanger");
 }
@@ -66,6 +74,14 @@ int TabChanger::x() {
 }
 
 void TabChanger::AddPage(QString label, QFile *file) {
+    if (!file->open(QIODevice::ReadOnly)) {
+        QErrorMessage msg;
+        msg.showMessage("Cant open file!");
+        msg.exec();
+        return;
+    }
+    file->close();
+
     auto editorLayout = new EditorLayout(file);
 
     for (const auto &item : findChildren<TextEditor *>()) {

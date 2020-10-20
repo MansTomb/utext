@@ -6,7 +6,7 @@
 Preferences::Preferences(const QMap<QString, QString>& preferences, QWidget *parent) :
     QDialog(parent), ui(new Ui::Preferences), m_preferences(preferences) {
     ui->setupUi(this);
-    setObjectName("Preferences");
+    setObjectName(  "Preferences");
     setFont();
     setSizeFont();
     setTheme();
