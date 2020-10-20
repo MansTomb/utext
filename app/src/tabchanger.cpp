@@ -41,6 +41,7 @@ void TabChanger::dropEvent(QDropEvent *event) {
         if (finfo.isFile())
             AddPage(finfo.fileName(), new QFile(finfo.absoluteFilePath()));
     }
+    Connecter::instance().getLogger()->WriteToLog("File Dropped to TabChanger");
 }
 
 void TabChanger::ShowContextMenu(const QPoint& pos) {
@@ -77,6 +78,7 @@ void TabChanger::AddPage(QString label, QFile *file) {
     insertTab(0, editorLayout, label);
     setCurrentIndex(0);
     Connecter::instance().getSettings()->applySettingsToEditor(editorLayout->editor());
+    Connecter::instance().getLogger()->WriteToLog("Page Added");
 }
 
 void TabChanger::AddPage(QWidget *editor) {
@@ -85,6 +87,7 @@ void TabChanger::AddPage(QWidget *editor) {
     connect(editorLayout->editor(), &TextEditor::InFocus, this, [=]{emit TabFocused(this);});
     insertTab(0, editorLayout, editorLayout->file()->fileName().remove(0, editorLayout->file()->fileName().lastIndexOf('/') + 1));
     Connecter::instance().getSettings()->applySettingsToEditor(editorLayout->editor());
+    Connecter::instance().getLogger()->WriteToLog("Page Added");
 }
 
 void TabChanger::CloseTab(int index) {
@@ -92,4 +95,12 @@ void TabChanger::CloseTab(int index) {
     dynamic_cast<EditorLayout *>(editor)->editor()->SaveAtExit();
     removeTab(index);
     delete editor;
+    if (count() == 0)
+        delete this;
+    Connecter::instance().getLogger()->WriteToLog("Tab closed");
+}
+TabChanger::~TabChanger() {
+    emit TabFocused(Q_NULLPTR);
+    Connecter::instance().getLogger()->WriteToLog("TabChanger Deleted");
+
 }

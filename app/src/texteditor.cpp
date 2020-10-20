@@ -107,6 +107,7 @@ void TextEditor::Save() {
     file()->write(text.toStdString().c_str());
     file()->close();
     m_changed = false;
+    Connecter::instance().getLogger()->WriteToLog("File Saved");
 }
 
 void TextEditor::SaveAtExit() {

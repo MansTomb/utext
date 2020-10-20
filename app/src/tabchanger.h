@@ -14,6 +14,9 @@ class TabChanger : public QTabWidget {
  protected:
     void dragEnterEvent(QDragEnterEvent *event) override;
     void dragMoveEvent(QDragMoveEvent *event) override;
+ public:
+    virtual ~TabChanger();
+ protected:
     void dragLeaveEvent(QDragLeaveEvent *event) override;
     void dropEvent(QDropEvent *event) override;
  public:
