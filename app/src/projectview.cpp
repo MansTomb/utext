@@ -3,6 +3,7 @@
 #include "projectview.h"
 #include "emptywidget.h"
 #include "treeviewcontextdialog.h"
+#include "texteditor.h"
 
 ProjectView::ProjectView(QWidget *parent) : QTreeView(parent) {
     setContextMenuPolicy(Qt::ContextMenuPolicy::CustomContextMenu);
@@ -109,6 +110,15 @@ void ProjectView::Delete(QString file) {
 
     if (info.isDir()) {
         QDir dir(file);
+        auto filelist =  dir.entryInfoList();
+
+        filelist.removeFirst();
+        filelist.removeFirst();
+
+        for (const auto &editor : parent()->findChildren<TextEditor *>())
+            for (const auto &ffile : filelist)
+                if (ffile.filePath() == editor->file()->fileName())
+                    delete editor->parent();
         dir.removeRecursively();
     }
     else {
