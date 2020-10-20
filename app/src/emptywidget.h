@@ -15,6 +15,7 @@ class EmptyWidget : public QWidget {
     Q_OBJECT
  public:
     explicit EmptyWidget(QWidget *parent = Q_NULLPTR);
+    virtual ~EmptyWidget();
     void AddPageToLastFocus(QString label, QFile *file);
  public slots:
     void addNewWindow(TabChanger *tabs);
@@ -28,5 +29,5 @@ class EmptyWidget : public QWidget {
     void Split(const int x, const int y, QWidget *editor);
 
     QWidget *m_lastFocus {Q_NULLPTR};
-    QSplitter *m_split;
+    QSplitter *m_split {Q_NULLPTR};
 };

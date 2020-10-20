@@ -13,7 +13,13 @@ EmptyWidget::EmptyWidget(QWidget *parent) : QWidget(parent){
 }
 
 void EmptyWidget::dropEvent(QDropEvent *event) {
-    qDebug() << event->pos().x() << " " << event->pos().y() << ": " << size().width() << ":" << size().height();
+    if (!event->mimeData()->hasUrls())
+        return;
+    auto files = event->mimeData()->urls();
+
+    for (const auto &file : files) {
+        AddPageToLastFocus(file.fileName(), new QFile(file.fileName()));
+    }
 }
 void EmptyWidget::dragEnterEvent(QDragEnterEvent *event) {
     event->acceptProposedAction();
@@ -62,4 +68,8 @@ void EmptyWidget::AddPageToLastFocus(QString label, QFile *file) {
         addNewWindow(tab);
         tab->AddPage(label, file);
     }
+}
+
+EmptyWidget::~EmptyWidget() {
+    delete m_split;
 }

@@ -35,7 +35,6 @@ MainWindow::~MainWindow() {
     saveSettings();
     delete settings;
     delete ui;
-    system("leaks -q utext");
 }
 
 void MainWindow::on_actionOpen_File_triggered() {
