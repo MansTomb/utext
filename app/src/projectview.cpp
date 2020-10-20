@@ -32,7 +32,7 @@ void ProjectView::dropEvent(QDropEvent *event) {
 }
 void ProjectView::mouseDoubleClickEvent(QMouseEvent *event) {
     QTreeView::mouseDoubleClickEvent(event);
-    QFileInfo *file = new QFileInfo(dynamic_cast<QFileSystemModel *>(model())->filePath(currentIndex()));
+    auto *file = new QFileInfo(dynamic_cast<QFileSystemModel *>(model())->filePath(currentIndex()));
 
     if (file->isFile() && parentWidget()->findChild<EmptyWidget *>())
         parentWidget()->findChild<EmptyWidget *>()->AddPageToLastFocus(file->fileName(), new QFile(file->absoluteFilePath()));
@@ -58,7 +58,7 @@ void ProjectView::ShowContextMenu(const QPoint &pos) {
 }
 
 void ProjectView::CreateFile(QString path) {
-    TreeViewContextDialog *dialog = new TreeViewContextDialog(this);
+    auto *dialog = new TreeViewContextDialog(this);
 
     if (dialog->exec()) {
         if (!QFileInfo(path).isDir())
