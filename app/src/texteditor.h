@@ -25,6 +25,9 @@ class TextEditor : public QTextEdit {
     void SearchInText(QString from, bool isRegex);
     void ReplaceInText(QString from, QString to, bool isRegex);
     void Save();
+ protected:
+    void keyPressEvent(QKeyEvent *e) override;
+ public:
     void SaveAtExit();
     QFile *file();
  public slots:
@@ -42,4 +45,5 @@ class TextEditor : public QTextEdit {
     void TriggerReplace(QString selectedText);
  private:
     QFile *m_file = Q_NULLPTR;
+    bool m_changed {false};
 };

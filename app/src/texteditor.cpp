@@ -22,6 +22,7 @@ void TextEditor::addText() {
     if (hasFocus())
         insertPlainText("124");
 }
+
 void TextEditor::focusInEvent(QFocusEvent *e) {
     QTextEdit::focusInEvent(e);
     emit InFocus(this);
@@ -105,9 +106,12 @@ void TextEditor::Save() {
     file()->open(QIODevice::ReadWrite | QIODevice::Text | QIODevice::Truncate);
     file()->write(text.toStdString().c_str());
     file()->close();
+    m_changed = false;
 }
 
 void TextEditor::SaveAtExit() {
+    if (!m_changed)
+        return;
     QMessageBox msg;
     QString text;
 
@@ -118,4 +122,9 @@ void TextEditor::SaveAtExit() {
     msg.setDefaultButton(QMessageBox::Save);
     if (msg.exec() == QMessageBox::Save)
         Save();
+}
+
+void TextEditor::keyPressEvent(QKeyEvent *e) {
+    QTextEdit::keyPressEvent(e);
+    m_changed = true;
 }
