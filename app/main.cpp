@@ -13,9 +13,5 @@ int main(int argc, char *argv[]) {
     w.setAutoFillBackground(true);
     w.show();
 
-    system("leaks -q utext");
-    a.exec();
-    system("leaks -q utext");
-
-    return 1;
+    return a.exec();
 }
