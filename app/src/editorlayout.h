@@ -9,7 +9,7 @@
 #include "replace.h"
 
 class EditorLayout : public QWidget {
-    Q_OBJECT
+ Q_OBJECT
  public:
     explicit EditorLayout(QFile *file = Q_NULLPTR, QWidget *parent = Q_NULLPTR);
 
@@ -18,7 +18,7 @@ class EditorLayout : public QWidget {
  public slots:
     void setSearchHidden(QString selectedText);
     void setReplaceHidden(QString selectedText);
-signals:
+ signals:
     void PipeForReplace(QString from, QString to, bool isRegex);
  private:
     QFile *m_file = Q_NULLPTR;

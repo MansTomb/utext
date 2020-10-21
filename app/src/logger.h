@@ -12,7 +12,7 @@
 #include "cpphighligher.h"
 
 class Logger : public QTextEdit {
-    Q_OBJECT
+ Q_OBJECT
  public:
     explicit Logger(QWidget *parent = Q_NULLPTR);
     void WriteToLog(QString message);

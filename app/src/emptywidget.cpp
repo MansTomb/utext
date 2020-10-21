@@ -2,7 +2,7 @@
 #include "texteditor.h"
 #include "tabchanger.h"
 
-EmptyWidget::EmptyWidget(QWidget *parent) : QWidget(parent){
+EmptyWidget::EmptyWidget(QWidget *parent) : QWidget(parent) {
     auto gridLayout = new QGridLayout;
     gridLayout->setMargin(0);
     setLayout(gridLayout);
@@ -39,8 +39,7 @@ void EmptyWidget::addNewWindow(TabChanger *tabs) {
     if (tabs->y() == -1) {
         m_split->insertWidget(0, new QSplitter(Qt::Orientation::Horizontal, this));
         dynamic_cast<QSplitter *>(m_split->widget(0))->insertWidget(tabs->x(), tabs);
-    }
-    else {
+    } else {
         dynamic_cast<QSplitter *>(m_split->widget(tabs->y()))->addWidget(tabs);
     }
 }

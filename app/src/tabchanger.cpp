@@ -10,7 +10,7 @@
 #include <QFileInfo>
 #include <QErrorMessage>
 
-TabChanger::TabChanger(int x, int y, QWidget *parent) : m_x(x), m_y(y), QTabWidget(parent) {
+TabChanger::TabChanger(int x, int y, QWidget *parent) : QTabWidget(parent), m_x(x), m_y(y)  {
     setContextMenuPolicy(Qt::ContextMenuPolicy::CustomContextMenu);
     setAcceptDrops(true);
     setDocumentMode(true);
@@ -52,15 +52,21 @@ void TabChanger::dropEvent(QDropEvent *event) {
     Connecter::instance().getLogger()->WriteToLog("File Dropped to TabChanger");
 }
 
-void TabChanger::ShowContextMenu(const QPoint& pos) {
+void TabChanger::ShowContextMenu(const QPoint &pos) {
     QMenu contextMenu(tr("Context menu"), this);
     QAction action1(tr("Split Horizontaly"), this);
     QAction action2(tr("Split Verticaly"), this);
 
     contextMenu.addAction(&action1);
-    connect(&action1, &QAction::triggered, this, [=] { SplitHorizontaly(m_x + 1, m_y, dynamic_cast<EditorLayout *>(currentWidget())->editor());});
+    connect(&action1,
+            &QAction::triggered,
+            this,
+            [=] { SplitHorizontaly(m_x + 1, m_y, dynamic_cast<EditorLayout *>(currentWidget())->editor()); });
     contextMenu.addAction(&action2);
-    connect(&action2, &QAction::triggered, this, [=] { SplitVerticaly(m_x, m_y + 1, dynamic_cast<EditorLayout *>(currentWidget())->editor());});
+    connect(&action2,
+            &QAction::triggered,
+            this,
+            [=] { SplitVerticaly(m_x, m_y + 1, dynamic_cast<EditorLayout *>(currentWidget())->editor()); });
 
     contextMenu.exec(mapToGlobal(pos));
 }
@@ -90,7 +96,7 @@ void TabChanger::AddPage(QString label, QFile *file) {
             return;
         }
     }
-    connect(editorLayout->editor(), &TextEditor::InFocus, this, [=]{emit TabFocused(this);});
+    connect(editorLayout->editor(), &TextEditor::InFocus, this, [=] { emit TabFocused(this); });
     insertTab(0, editorLayout, label);
     setCurrentIndex(0);
     Connecter::instance().getSettings()->applySettingsToEditor(editorLayout->editor());
@@ -100,8 +106,10 @@ void TabChanger::AddPage(QString label, QFile *file) {
 void TabChanger::AddPage(QWidget *editor) {
     auto editorLayout = new EditorLayout(dynamic_cast<TextEditor *>(editor)->file());
 
-    connect(editorLayout->editor(), &TextEditor::InFocus, this, [=]{emit TabFocused(this);});
-    insertTab(0, editorLayout, editorLayout->file()->fileName().remove(0, editorLayout->file()->fileName().lastIndexOf('/') + 1));
+    connect(editorLayout->editor(), &TextEditor::InFocus, this, [=] { emit TabFocused(this); });
+    insertTab(0,
+              editorLayout,
+              editorLayout->file()->fileName().remove(0, editorLayout->file()->fileName().lastIndexOf('/') + 1));
     Connecter::instance().getSettings()->applySettingsToEditor(editorLayout->editor());
     Connecter::instance().getLogger()->WriteToLog("Page Added");
 }

@@ -3,9 +3,8 @@
 #include <QtGui/QSyntaxHighlighter>
 #include <QtCore/QRegularExpression>
 
-class CppHighLighter : public QSyntaxHighlighter
-{
-    Q_OBJECT
+class CppHighLighter : public QSyntaxHighlighter {
+ Q_OBJECT
 
  public:
     explicit CppHighLighter(QTextDocument *parent = 0);
@@ -14,8 +13,7 @@ class CppHighLighter : public QSyntaxHighlighter
     void highlightBlock(const QString &text) override;
 
  private:
-    struct HighlightingRule
-    {
+    struct HighlightingRule {
         QRegularExpression pattern;
         QTextCharFormat format;
     };

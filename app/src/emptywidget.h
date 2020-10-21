@@ -12,7 +12,7 @@
 #include "tabchanger.h"
 
 class EmptyWidget : public QWidget {
-    Q_OBJECT
+ Q_OBJECT
  public:
     explicit EmptyWidget(QWidget *parent = Q_NULLPTR);
     virtual ~EmptyWidget();
@@ -28,6 +28,6 @@ class EmptyWidget : public QWidget {
  private:
     void Split(const int x, const int y, QWidget *editor);
 
-    QWidget *m_lastFocus {Q_NULLPTR};
-    QSplitter *m_split {Q_NULLPTR};
+    QWidget *m_lastFocus{Q_NULLPTR};
+    QSplitter *m_split{Q_NULLPTR};
 };

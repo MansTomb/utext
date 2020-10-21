@@ -1,6 +1,6 @@
 #include "replace.h"
 
-ReplaceBar::ReplaceBar(QWidget *parent) : QWidget(parent){
+ReplaceBar::ReplaceBar(QWidget *parent) : QWidget(parent) {
     replace = new QLineEdit(this);
 
     replace->setPlaceholderText(tr("Replace (use enter to replace finds one by one)"));
@@ -9,7 +9,7 @@ ReplaceBar::ReplaceBar(QWidget *parent) : QWidget(parent){
     layout()->setMargin(0);
     layout()->addWidget(replace);
 
-    connect(replace, &QLineEdit::returnPressed, this, [=]{emit MyReturnPressed(replace->text());});
+    connect(replace, &QLineEdit::returnPressed, this, [=] { emit MyReturnPressed(replace->text()); });
 }
 
 void ReplaceBar::Hidden(bool hide) {

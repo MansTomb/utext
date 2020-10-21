@@ -3,8 +3,7 @@
 #include <QtGui/QSyntaxHighlighter>
 #include <QtCore/QRegularExpression>
 
-class HtmlHighLighter : public QSyntaxHighlighter
-{
+class HtmlHighLighter : public QSyntaxHighlighter {
  Q_OBJECT
 
  public:
@@ -19,8 +18,7 @@ class HtmlHighLighter : public QSyntaxHighlighter
 
     void setFormatFor(Construct construct,
                       const QTextCharFormat &format);
-    QTextCharFormat formatFor(Construct construct) const
-    { return m_formats[construct]; }
+    QTextCharFormat formatFor(Construct construct) const { return m_formats[construct]; }
 
  protected:
     enum State {

@@ -1,7 +1,7 @@
 #include "Connecter.h"
 #include "texteditor.h"
 
-Connecter& Connecter::instance() {
+Connecter &Connecter::instance() {
     static Connecter connecter;
     return connecter;
 }

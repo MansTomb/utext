@@ -5,10 +5,10 @@
 
 class Connecter {
  public:
-    Connecter(Connecter& other) = delete;
-    void operator=(const Connecter& other) = delete;
+    Connecter(Connecter &other) = delete;
+    void operator=(const Connecter &other) = delete;
 
-    static Connecter& instance();
+    static Connecter &instance();
     void setToolbar(QToolBar *tb);
     void setLogger(Logger *logger);
     void setSettings(Settings *settings);

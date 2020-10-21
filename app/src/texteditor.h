@@ -17,7 +17,7 @@ class Filter : public QObject {
 };
 
 class TextEditor : public QTextEdit {
-    Q_OBJECT
+ Q_OBJECT
  protected:
     void focusInEvent(QFocusEvent *e) override;
  public:
@@ -45,5 +45,5 @@ class TextEditor : public QTextEdit {
     void TriggerReplace(QString selectedText);
  private:
     QFile *m_file = Q_NULLPTR;
-    bool m_changed {false};
+    bool m_changed{false};
 };

@@ -10,7 +10,7 @@
 #include <QSettings>
 
 class TabChanger : public QTabWidget {
-    Q_OBJECT
+ Q_OBJECT
  protected:
     void dragEnterEvent(QDragEnterEvent *event) override;
     void dragMoveEvent(QDragMoveEvent *event) override;
@@ -26,7 +26,7 @@ class TabChanger : public QTabWidget {
     int x();
     int y();
  public slots:
-    void ShowContextMenu(const QPoint& pos);
+    void ShowContextMenu(const QPoint &pos);
  private slots:
     void CloseTab(int index);
  signals:

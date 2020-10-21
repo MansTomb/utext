@@ -7,7 +7,7 @@
 #include "htmlhighlighter.h"
 #include "editorlayout.h"
 
-TextEditor::TextEditor(QFile *file, QWidget *parent) : m_file(file), QTextEdit(parent) {
+TextEditor::TextEditor(QFile *file, QWidget *parent) : QTextEdit(parent), m_file(file) {
     QString &extension = m_file->fileName().remove(0, m_file->fileName().lastIndexOf("."));
     if (extension == ".cpp" || extension == ".h")
         new CppHighLighter(document());
@@ -73,8 +73,7 @@ void TextEditor::SearchInText(QString from, bool isRegex) {
     if (cursor.isNull())
         cursor = QTextCursor(document());
 
-    if(!isReadOnly())
-    {
+    if (!isReadOnly()) {
         QColor color = QColor(Qt::gray).lighter(130);
         isRegex ? cursor = document()->find(QRegExp(from), cursor) : cursor = document()->find(from, cursor);
         if (!cursor.isNull()) {
@@ -120,7 +119,9 @@ void TextEditor::SaveAtExit() {
     QMessageBox msg;
     QString text;
 
-    text.append(tr("You wanna save file ")).append(file()->fileName().remove(0, file()->fileName().lastIndexOf("/") + 1).append("?"));
+    text.append(tr("You wanna save file ")).append(file()->fileName().remove(0,
+                                                                             file()->fileName().lastIndexOf("/")
+                                                                                 + 1).append("?"));
 
     msg.setText(text);
     msg.setStandardButtons(QMessageBox::Save | QMessageBox::Cancel);

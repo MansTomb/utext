@@ -12,7 +12,7 @@ SearchBar::SearchBar(QWidget *parent) : QWidget(parent) {
     layout()->addWidget(m_search);
     layout()->addWidget(m_regex);
 
-    connect(m_search, &QLineEdit::returnPressed, this, [=]{emit MyReturnPressed(m_search->text(), m_isRegex);});
+    connect(m_search, &QLineEdit::returnPressed, this, [=] { emit MyReturnPressed(m_search->text(), m_isRegex); });
     connect(m_regex, &QPushButton::clicked, this, &SearchBar::ButtonPressed);
 }
 

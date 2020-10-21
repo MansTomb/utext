@@ -9,7 +9,7 @@ Settings::Settings() {
     m_settings = new QSettings(QCoreApplication::applicationDirPath() + "/app/res/settings/settingsUtext.ini",
                                QSettings::IniFormat);
 
-    for(int i = 5; i < 99; i++) {
+    for (int i = 5; i < 99; i++) {
         if (i > 30) {
             i += 2;
         }
@@ -39,7 +39,7 @@ QSettings *Settings::getSettings() {
     return m_settings;
 }
 
-void Settings::setPreferences(const QMap<QString, QString>& preferences) {
+void Settings::setPreferences(const QMap<QString, QString> &preferences) {
     m_preferences.insert(preferences);
 }
 
@@ -49,7 +49,7 @@ void Settings::applySettingsToEditor(TextEditor *editor) {
     editor->setFont(font);
 }
 
-void Settings::applyTheme(const QString& nameTheme) {
+void Settings::applyTheme(const QString &nameTheme) {
     QFile File(":/qss/" + nameTheme + ".qss");
     File.open(QFile::ReadOnly);
     QString StyleSheet;
@@ -60,7 +60,10 @@ void Settings::applyTheme(const QString& nameTheme) {
 
 void Settings::checkValidPreferences() {
     m_allSettings["font"].contains(m_preferences["font"]) ? m_preferences["font"] : m_preferences["font"] = "Tahoma";
-    m_allSettings["size_font"].contains(m_preferences["size_font"]) ? m_preferences["size_font"] : m_preferences["size_font"] = "12";
-    m_allSettings["theme"].contains(m_preferences["theme"]) ? m_preferences["theme"] : m_preferences["theme"] = "Default";
-    m_allSettings["language"].contains(m_preferences["language"]) ? m_preferences["language"] : m_preferences["language"] = "English";
+    m_allSettings["size_font"].contains(m_preferences["size_font"]) ? m_preferences["size_font"] :
+        m_preferences["size_font"] = "12";
+    m_allSettings["theme"].contains(m_preferences["theme"]) ? m_preferences["theme"] : m_preferences["theme"] =
+                                                                                           "Default";
+    m_allSettings["language"].contains(m_preferences["language"]) ? m_preferences["language"] :
+        m_preferences["language"] = "English";
 }

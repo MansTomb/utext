@@ -18,7 +18,6 @@
 #include "Connecter.h"
 #include "settings.h"
 
-
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -27,17 +26,17 @@ class MainWindow : public QMainWindow {
  Q_OBJECT
 
  public:
-    MainWindow(const QString& name, QWidget *parent = nullptr);
+    MainWindow(const QString &name, QWidget *parent = nullptr);
     ~MainWindow();
 
-private slots:
+ private slots:
     void on_actionOpen_File_triggered();
     void on_actionOpen_Folder_triggered();
     void on_actionSettings_triggered();
-    void ProcessPreferences(const QMap<QString, QString>& preferences);
+    void ProcessPreferences(const QMap<QString, QString> &preferences);
     void SaveAllFiles();
 
-private:
+ private:
     void initSettings();
     void loadSettings();
     void saveSettings();

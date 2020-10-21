@@ -2,7 +2,7 @@
 #include "tabchanger.h"
 #include "preferences.h"
 
-MainWindow::MainWindow(const QString& name, QWidget *parent)
+MainWindow::MainWindow(const QString &name, QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow) {
     ui->setupUi(this);
 
@@ -42,7 +42,7 @@ void MainWindow::on_actionOpen_File_triggered() {
     QString file = QFileDialog::getOpenFileName(this, tr("Open File"), "/home");
     if (!file.isEmpty()) {
         auto *ffile = new QFile(file);
-        ui->widget->AddPageToLastFocus(file.remove(0,file.lastIndexOf('/') + 1), ffile);
+        ui->widget->AddPageToLastFocus(file.remove(0, file.lastIndexOf('/') + 1), ffile);
         delete ffile;
     }
 }
@@ -86,7 +86,7 @@ void MainWindow::saveSettings() {
     tmp_settings->endGroup();
 }
 
-void MainWindow::ProcessPreferences(const QMap<QString, QString>& preferencesDialog) {
+void MainWindow::ProcessPreferences(const QMap<QString, QString> &preferencesDialog) {
     preferences->setPreferences(preferencesDialog);
     saveSettings();
     preferences->applyTheme(preferencesDialog["theme"]);
